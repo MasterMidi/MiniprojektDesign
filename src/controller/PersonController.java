@@ -1,7 +1,5 @@
 package controller;
 
-import java.util.ArrayList;
-
 import model.Person;
 import model.PersonContainer;
 
@@ -12,17 +10,8 @@ public class PersonController {
 		personContainer = PersonContainer.getInstance();
 	}
 	
-	public ArrayList<Person> findPerson(String input){
-		ArrayList<Person> persons;
+	public Person[] findPerson(String input){
+		return personContainer.findPerson(input);
 		
-		try {
-			Integer.parseInt(input);
-			
-			persons = personContainer.findByNumber(input);
-		} catch(NumberFormatException ex) {
-			persons = personContainer.findByName(input);
-		}
-		
-		return persons;
 	}
 }
