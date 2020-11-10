@@ -27,9 +27,9 @@ public class LPContainer {
 	}
 	
 	public LP[] findLP(String title) {
-		LP[] lpsFound = (LP[]) lps.stream()
+		LP[] lpsFound = lps.stream()
 				.filter(lp -> lp.getTitle().contains(title))
-				.collect(Collectors.toList()).toArray(LP[]::new);
+				.toArray(LP[]::new);
 
 		return lpsFound;
 	}

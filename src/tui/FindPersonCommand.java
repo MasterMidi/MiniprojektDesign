@@ -30,10 +30,13 @@ public class FindPersonCommand implements ICommand {
 		
 		for(int i = 0; i < persons.length; i++) {
 			personMap.put(i, persons[i]);
-			System.out.println("(" + i + ") " + persons[i].getName());
+			System.out.println("(" + i + ") " + persons[i].getName() + "\t: " + persons[i].getPhoneNr());
 		}
 		
-		person = personMap.get(TextInput.inputNumber("Valg"));
+		int key = TextInput.inputNumber("Valg");
+		if(personMap.containsKey(key)) {
+			person = personMap.get(key);			
+		}
 	}
 	
 	public void selectLPs() {
@@ -45,7 +48,10 @@ public class FindPersonCommand implements ICommand {
 			System.out.println("(" + i + ") " + lps[i].getTitle());
 		}
 		
-		lp = lpMap.get(TextInput.inputNumber("Valg"));
+		int key = TextInput.inputNumber("Valg");
+		if(lpMap.containsKey(key)) {
+			lp = lpMap.get(key);			
+		}
 	}
 	
 	public void selectCopies() {
@@ -57,7 +63,10 @@ public class FindPersonCommand implements ICommand {
 			System.out.println("(" + i + ") " + copies[i].getSerialNumber());
 		}
 		
-		copy = copyMap.get(TextInput.inputNumber("Valg"));
+		int key = TextInput.inputNumber("Valg");
+		if(copyMap.containsKey(key)) {
+			copy = copyMap.get(key);			
+		}
 	}
 
 	@Override

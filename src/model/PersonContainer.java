@@ -24,14 +24,16 @@ public class PersonContainer {
 		persons.add(new Person("Jannie", "30616515"));
 		persons.add(new Person("Johnny", "12938102"));
 		persons.add(new Person("Michael", "132837198"));
+		persons.add(new Person("Julius", "53381465"));
+		persons.add(new Person("Nicklas", "20741072"));
 	}
 
 	public Person[] findPerson(String input) {
 		boolean isInt = input.matches("\\d+");
 		
 		Person[] personsFound = persons.stream()
-				.filter(p -> (isInt) ? p.getPhoneNr().startsWith(input) : p.getName().startsWith(input))
-				.collect(Collectors.toList()).toArray(Person[]::new);
+				.filter(p -> (isInt) ? p.getPhoneNr().contains(input) : p.getName().contains(input))
+				.toArray(Person[]::new);
 		
 		return personsFound;
 	}
