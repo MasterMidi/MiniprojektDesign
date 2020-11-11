@@ -2,6 +2,7 @@ package model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class PersonContainer {
 	private static PersonContainer instance;
@@ -17,7 +18,8 @@ public class PersonContainer {
 
 	private PersonContainer() {
 		persons = new ArrayList<>();
-
+		
+		//Dummy data
 		persons.add(new Person("Michael", "24267667"));
 		persons.add(new Person("Anders", "41398413"));
 		persons.add(new Person("Jannie", "30616515"));
@@ -36,5 +38,34 @@ public class PersonContainer {
 				.toArray(Person[]::new);
 		
 		return personsFound;
+	}
+	
+	public Person selectPerson(String id)
+	{
+		Optional<Person> person = persons.stream()
+				.filter(p -> p.getPhoneNr().equals(id)).findFirst();
+		
+		return person.get();
+		
+	}
+	
+	public void deletePerson(String id)
+	{
+		persons.remove(selectPerson(id));
+		
+	}
+	
+	public void updatePerson(String id, String name, String address, String phoneNr, String postalCode, String city)
+	{
+		
+		int index = persons.indexOf(selectPerson(id));
+
+		//Null check. If null, use the already set value
+		persons.get(index).setName((name == null || name.isEmpty()) ? persons.get(index).getName() : name);
+		persons.get(index).setName((address == null || address.isEmpty()) ? persons.get(index).getAddress() : address);
+		persons.get(index).setName((phoneNr == null || phoneNr.isEmpty()) ? persons.get(index).getPhoneNr() : phoneNr);
+		persons.get(index).setName((postalCode == null || postalCode.isEmpty()) ? persons.get(index).getPostalCode() : postalCode);
+		persons.get(index).setName((city == null || city.isEmpty()) ? persons.get(index).getCity() : city);
+		
 	}
 }
