@@ -11,37 +11,36 @@ import util.Util;
 public class DeletePersonCommand implements Option {
 
 	PersonController controller;
-	
+	List<Person> persons;
+	String name;
+
 	@Override
 	public void start() {
-		
+
 		Util.flush();
 		controller = new PersonController();
-		
+		persons = controller.findPersons(TextInput.inputString("S�g efter navn/telefon nummer"));
+
 		findPersons();
-		
+
 		String id = selectPerson();
-		
+
 		displayPerson(id);
-		
-		boolean delete = (TextInput.inputString("Er du sikker på du vil slette overstående person? (Y/n)") == "Y");
-		
-		if(delete)
-		{
+
+		boolean delete = (TextInput.inputString("Er du sikker på du vil slette overstående person? (Y/n)").equals("Y"));
+
+		if (delete) {
 			controller.deletePerson(id);
-		}
-		else
-		{
+			System.out.println(String.format("Personen '%s' er slettet fra systemet.", name));
+
+		} else {
 			start();
 		}
-		
+
 	}
-	
-	
+
 	public void findPersons() {
 		System.out.println("Find person med navn eller telefon");
-		List<Person> persons = controller.findPersons(TextInput.inputString("S�g efter navn/telefon nummer"));
-
 		for (int i = 0; i < persons.size(); i++) {
 			System.out.println("(" + i + ") " + persons.get(i).getName() + "\t: " + persons.get(i).getPhoneNr());
 		}
@@ -49,20 +48,18 @@ public class DeletePersonCommand implements Option {
 
 	public String selectPerson() {
 		System.out.println("V�lg den �nskede person");
-		List<Person> persons = controller.findPersons(TextInput.inputString("S�g efter Navn eller telefon"));
 		String id = null;
-		
-		
+
 		while (id == null) {
 			int key = TextInput.inputNumber("Vælg");
-			if (key < persons.size()) 
-			{
+			if (key < persons.size()) {
+				name = persons.get(key).getName();
 				id = persons.get(key).getPhoneNr();
 			} else {
 				System.out.println("Ikke en mulighed");
 			}
 		}
-		
+
 		return id;
 	}
 
@@ -74,7 +71,7 @@ public class DeletePersonCommand implements Option {
 		System.out.println("Addresse:\t[" + person.getAddress() + "]");
 		System.out.println("By:\t\t[" + person.getCity() + "]");
 		System.out.println("Postnummber:\t[" + person.getPostalCode() + "]");
-		
+
 	}
 
 	@Override
@@ -82,6 +79,5 @@ public class DeletePersonCommand implements Option {
 		// TODO Auto-generated method stub
 		return "Slet Person";
 	}
-	
 
 }

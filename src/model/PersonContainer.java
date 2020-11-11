@@ -35,7 +35,7 @@ public class PersonContainer {
 		boolean isInt = input.matches("\\d+");
 		
 		return persons.stream()
-				.filter(p -> (isInt) ? p.getPhoneNr().contains(input) : p.getName().contains(input))
+				.filter(p -> (isInt) ? p.getPhoneNr().contains(input) : p.getName().toLowerCase().contains(input.toLowerCase()))
 				.collect(Collectors.toList());
 
 	}
@@ -57,7 +57,19 @@ public class PersonContainer {
 	
 	public void updatePerson(String id, String name, String address, String phoneNr, String postalCode, String city)
 	{
-		int index = persons.indexOf(selectPerson(id));
+		System.out.println(name);
+		Person p = selectPerson(id);
+		
+		String t = (p == null) ? "P er null!" : "p er ikke null!";
+		
+		System.out.println(t);
+		
+		
+		System.out.println("Name: " + p.getName());
+		
+		int index = persons.indexOf(p);
+		
+		System.out.println("Index: " + index);
 
 		//Null check. If null, use the already set value
 		persons.get(index).setName((name == null || name.isEmpty()) ? persons.get(index).getName() : name);

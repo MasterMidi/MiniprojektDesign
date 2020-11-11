@@ -7,35 +7,34 @@ import model.PersonContainer;
 
 public class PersonController {
 	private PersonContainer personContainer;
-	
 
 	public PersonController() {
 		personContainer = PersonContainer.getInstance();
 	}
-	
-	
-	public List<Person> findPersons(String input){
+
+	public List<Person> findPersons(String input) {
 		return personContainer.findPersons(input);
 
 	}
-	
-	public Person selectPerson(String id)
-	{
+
+	public Person selectPerson(String id) {
 		return personContainer.selectPerson(id);
 	}
-	
-	public Person CreatePerson(String name, String address, String phoneNr, String postalCode, String city)
-	{
+
+	public Person CreatePerson(String name, String address, String phoneNr, String postalCode, String city) {
 		return personContainer.addPerson(name, address, phoneNr, postalCode, city);
 	}
-	
-	public Person getPerson(String id)
-	{
+
+	public Person getPerson(String id) {
 		return personContainer.selectPerson(id);
 	}
-	
-	public void deletePerson(String id)
-	{
+
+	public void updatePerson(String id, String name, String address, String phoneNr, String postalCode, String city) {
+		personContainer.updatePerson(id, name, address, phoneNr, postalCode, city);
+	}
+
+	public void deletePerson(String id) {
 		personContainer.deletePerson(id);
 	}
+
 }
