@@ -11,12 +11,12 @@ import model.Loan;
 import model.Person;
 import util.Util;
 
-public class LendCommand implements ICommand {
+public class LendCommand implements Option {
 	private LoanController loanController = new LoanController();
 	private String commandName = "Udlån LP";
 
 	@Override
-	public void execute() {
+	public void start() {
 		loanController.createLoan();
 
 		Util.flush();
@@ -135,7 +135,7 @@ public class LendCommand implements ICommand {
 	}
 
 	@Override
-	public String getCommandName() {
+	public String getDescription() {
 		return commandName;
 	}
 
