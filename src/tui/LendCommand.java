@@ -1,5 +1,6 @@
 package tui;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,48 +17,49 @@ public class LendCommand implements ICommand {
 
 	@Override
 	public void execute() {
-		Util.flush();
-		Person person = selectPersons();
-		displayPerson(person);
-
-		Util.flush();
-		LP lp = selectLPs();
-		displayLP(lp);
-		Copy copy = selectCopies(lp);
-
-		Util.flush();
-		Loan loan = loanController.lendCopy(7, copy.getSerialNumber(), person.getPhoneNr());
-		displayLoanConfirmation(loan);
+		loanController.createLoan();
 		
+		Util.flush();
+		findPersons();
+		
+		Util.flush();
+		findLPs();
+
+		Util.flush();
+		displayLoanConfirmation(loanController.getLoan());
+
 		System.out.println();
 		System.out.println("Successfuld oprettede et nyt lån");
 	}
 
-	public Person selectPersons() {
+	public void findPersons() {
 		System.out.println("Find person med navn eller telefon");
 		Person[] persons = loanController.findPerson(TextInput.inputString("Søg"));
-		Map<Integer, Person> personMap = new HashMap<>();
-		Person person = null;
-
+		
 		for (int i = 0; i < persons.length; i++) {
-			personMap.put(i, persons[i]);
 			System.out.println("(" + i + ") " + persons[i].getName() + "\t: " + persons[i].getPhoneNr());
 		}
+		
+		selectPerson();
+	}
 
-		boolean done = false;
-		while(!done) {
+	public void selectPerson() {
+		System.out.println("Vælg den ønskede person");
+		ArrayList<Person> personArr = loanController.getPersonArr();
+		Person person = null;
+
+		while (person == null) {
 			int key = TextInput.inputNumber("Valg");
-			if (personMap.containsKey(key)) {
-				person = personMap.get(key);
-				done = true;
+			if (key < personArr.size()) {
+				loanController.linkPerson(personArr.get(key).getPhoneNr());
 			} else {
 				System.out.println("Ikke en mulighed");
 			}
 		}
 		
-		return person;
+		displayPerson(person);
 	}
-	
+
 	public void displayPerson(Person person) {
 		Util.flush();
 		System.out.println("Navn:\t\t[" + person.getName() + "]");
@@ -67,31 +69,35 @@ public class LendCommand implements ICommand {
 		System.out.println("Postnummber:\t[" + person.getPostalCode() + "]");
 	}
 
-	public LP selectLPs() {
+	public void findLPs() {
 		System.out.println("Søg efter den ønskede LP");
 		LP[] lps = loanController.findLP(TextInput.inputString("Søg"));
-		Map<Integer, LP> lpMap = new HashMap<>();
-		LP lp = null;
 
 		for (int i = 0; i < lps.length; i++) {
-			lpMap.put(i, lps[i]);
 			System.out.println("(" + i + ") " + lps[i].getTitle());
 		}
+		
+		selectLPs();
+	}
 
-		boolean done = false;
-		while(!done) {
+	public void selectLPs() {
+		System.out.println("Vælg den ønskede LP");
+		ArrayList<LP> lpArr = loanController.getLpArr();
+		LP lp = null;
+
+		while (lp == null) {
 			int key = TextInput.inputNumber("Valg");
-			if (lpMap.containsKey(key)) {
-				lp = lpMap.get(key);
-				done = true;
+			if (key < lpArr.size()) {
+				lp = lpArr.get(key);
 			} else {
 				System.out.println("Ikke en mulighed");
 			}
 		}
 
-		return lp;
+		displayLP(lp);
+		selectCopy(lp);
 	}
-	
+
 	public void displayLP(LP lp) {
 		Util.flush();
 		System.out.println("Title:\t\t[" + lp.getTitle() + "]");
@@ -100,31 +106,23 @@ public class LendCommand implements ICommand {
 		System.out.println("Stregkode:\t[" + lp.getBarcode() + "]");
 	}
 
-	public Copy selectCopies(LP lp) {
+	public void selectCopy(LP lp) {
 		System.out.println("Vælg den ønskede kopi");
-		Copy[] copies = lp.getCopies();
-		Map<Integer, Copy> copyMap = new HashMap<>();
+		ArrayList<Copy> copyArr = loanController.getCopyArr();
 		Copy copy = null;
 
-		for (int i = 0; i < copies.length; i++) {
-			copyMap.put(i, copies[i]);
-			System.out.println("(" + i + ") " + copies[i].getSerialNumber());
-		}
-
-		boolean done = false;
-		while(!done) {
+		while (copy == null) {
 			int key = TextInput.inputNumber("Valg");
-			if (copyMap.containsKey(key)) {
-				copy = copyMap.get(key);
-				done = true;
+			if (key < copyArr.size()) {
+				copy = copyArr.get(key);
 			} else {
 				System.out.println("Ikke en mulighed");
 			}
 		}
 
-		return copy;
+		loanController.linkCopy(copy.getSerialNumber());
 	}
-	
+
 	public void displayLoanConfirmation(Loan loan) {
 		Util.flush();
 		System.out.println("ID:\t\t[" + loan.getId() + "]");

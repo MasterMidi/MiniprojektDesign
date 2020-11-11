@@ -13,6 +13,10 @@ public class Loan {
 		this.serialNumber = serialNumber;
 		this.phoneNr = phoneNr;
 	}
+	
+	public Loan() {
+		this(null, 0, null, null);
+	}
 
 	public int getPeriod() {
 		return period;

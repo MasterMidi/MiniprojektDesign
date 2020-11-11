@@ -5,9 +5,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import controller.LoanController;
-import model.Copy;
-import model.LP;
-import model.Person;
 import util.Util;
 
 public class LoanUI implements IMenu {
