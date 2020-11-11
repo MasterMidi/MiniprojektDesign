@@ -2,6 +2,6 @@ package tui;
 
 public interface IMenu {
 	public void open();
-	public void choose();
-	public String getMenuName();
+	public String getDescription();
+	public boolean choice(boolean done);
 }

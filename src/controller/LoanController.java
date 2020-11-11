@@ -29,11 +29,11 @@ public class LoanController {
 		
 	}
 	
-	public boolean lendCopy(int period, String serialNumber, String phoneNr) {
+	public Loan lendCopy(int period, String serialNumber, String phoneNr) {
 		Random rnd = new Random();
 		loan = new Loan("" + rnd.nextInt(10000), period, serialNumber, phoneNr);
 		loanContainer.addLoan(loan);
 		
-		return true;
+		return loan;
 	}
 }

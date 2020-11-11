@@ -35,6 +35,7 @@ public class TextInput {
 	}
 
 	private static void printQuestion(String question) {
-		System.out.print(" " + question + ": ");
+		System.out.println();
+		System.out.print(" -> " + question + ": ");
 	}
 }

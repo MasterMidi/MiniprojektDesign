@@ -13,97 +13,61 @@ import util.Util;
 public class LoanUI implements IMenu {
 	private LoanController loanController;
 	private Map<Integer, ICommand> options;
-	private String menuName;
+	private String description = "Låner menu";
 
 	public LoanUI() {
-		menuName = "Loan Menu";
-
 		options = new HashMap<Integer, ICommand>();
-
-		options.put(1, new FindPersonCommand());
+		options.put(1, new LendCommand());
 
 		this.loanController = new LoanController();
 	}
 
 	public void open() {
-		choose();
+		boolean done = false;
+		
+		Util.flush();
+		while (!done) {
+			printOptions();
+			done = choice(done);
+		}
 	}
 
-	public String getMenuName() {
+	public String getDescription() {
 		// TODO Auto-generated method stub
-		return menuName;
+		return description;
 	}
 
 	@Override
-	public void choose() {
-		Util.flush();
-		Person person = selectPersons();
+	public boolean choice(boolean done) {
+		int input = -1;
+
+		while (input == -1) {
+			int temp = TextInput.inputNumber("Valg");
+
+			if (options.containsKey(temp)) {
+				input = temp;
+				options.get(input).execute();
+			} else {
+				if (temp == 0) {
+					input = temp;
+					done = true;
+					System.out.println("Vi ses!");
+				} else {
+					Util.flush();
+					System.out.println("Ikke en valgmulighed");
+					printOptions();
+				}
+			}
+		}
 		
-		Util.flush();
-		LP lp = selectLPs();
-		
-		Util.flush();
-		Copy copy = selectCopies(lp);
-		
-		Util.flush();
-		if(loanController.lendCopy(7, copy.getSerialNumber(), person.getPhoneNr())) {
-			System.out.println("Successfully created new loan");
-		} else {
-			System.out.println("");
-		}
+		return done;
 	}
-
-	public Person selectPersons() {
-		Person[] persons = loanController.findPerson(TextInput.inputString("søg navn eller telefon"));
-		Map<Integer, Person> personMap = new HashMap<>();
-		Person person = null;
-
-		for (int i = 0; i < persons.length; i++) {
-			personMap.put(i, persons[i]);
-			System.out.println("(" + i + ") " + persons[i].getName() + "\t: " + persons[i].getPhoneNr());
+	
+	private void printOptions() {
+		System.out.println("****** " + description + " ******");
+		System.out.println("(0) Tilbage");
+		for (Entry<Integer, ICommand> entry : options.entrySet()) {
+			System.out.println("(" + entry.getKey() + ") " + entry.getValue().getCommandName());
 		}
-
-		int key = TextInput.inputNumber("Valg");
-		if (personMap.containsKey(key)) {
-			person = personMap.get(key);
-		}
-
-		return person;
-	}
-
-	public LP selectLPs() {
-		LP[] lps = loanController.findLP(TextInput.inputString("Søg"));
-		Map<Integer, LP> lpMap = new HashMap<>();
-		LP lp = null;
-
-		for (int i = 0; i < lps.length; i++) {
-			lpMap.put(i, lps[i]);
-			System.out.println("(" + i + ") " + lps[i].getTitle());
-		}
-
-		int key = TextInput.inputNumber("Valg");
-		if (lpMap.containsKey(key)) {
-			lp = lpMap.get(key);
-		}
-
-		return lp;
-	}
-
-	public Copy selectCopies(LP lp) {
-		Copy[] copies = lp.getCopies();
-		Map<Integer, Copy> copyMap = new HashMap<>();
-		Copy copy = null;
-
-		for (int i = 0; i < copies.length; i++) {
-			copyMap.put(i, copies[i]);
-			System.out.println("(" + i + ") " + copies[i].getSerialNumber());
-		}
-
-		int key = TextInput.inputNumber("Valg");
-		if (copyMap.containsKey(key)) {
-			copy = copyMap.get(key);
-		}
-
-		return copy;
 	}
 }

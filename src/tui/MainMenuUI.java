@@ -8,29 +8,24 @@ import util.Util;
 
 public class MainMenuUI implements IMenu {
 	private Map<Integer, IMenu> menues;
-	private String menuName;
-	private boolean done;
+	private String description = "Main Menu";
 
 	public MainMenuUI() {
-		// TODO Auto-generated constructor stub
-		menuName = "Main Menu";
-
 		menues = new HashMap<>();
-
 		menues.put(1, new LoanUI());
 
 		open();
 	}
 
 	public void open() {
-		done = false;
+		boolean done = false;
 		while (!done) {
 			printMenues();
-			choose();
+			done = choice(done);
 		}
 	}
 
-	public void choose() {
+	public boolean choice(boolean done) {
 		int input = -1;
 
 		while (input == -1) {
@@ -51,18 +46,20 @@ public class MainMenuUI implements IMenu {
 				}
 			}
 		}
+		
+		return done;
 	}
 
-	public String getMenuName() {
-		return menuName;
+	public String getDescription() {
+		return description;
 	}
 
 	private void printMenues() {
 		Util.flush();
-		System.out.println("****** " + menuName + " ******");
-		System.out.println("(0) exit");
+		System.out.println("****** " + description + " ******");
+		System.out.println("(0) Log af");
 		for (Entry<Integer, IMenu> entry : menues.entrySet()) {
-			System.out.println("(" + entry.getKey() + ") " + entry.getValue().getMenuName());
+			System.out.println("(" + entry.getKey() + ") " + entry.getValue().getDescription());
 		}
 	}
 

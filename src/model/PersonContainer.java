@@ -26,6 +26,7 @@ public class PersonContainer {
 		persons.add(new Person("Michael", "132837198"));
 		persons.add(new Person("Julius", "53381465"));
 		persons.add(new Person("Nicklas", "20741072"));
+		persons.add(new Person("Alex", "24986881"));
 	}
 
 	public Person[] findPerson(String input) {

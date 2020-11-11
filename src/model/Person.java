@@ -20,10 +20,6 @@ public class Person {
 		this(name, null, phoneNr, null, null);
 	}
 
-	public String getPhoneNr() {
-		return phoneNr;
-	}
-
 	public String getName() {
 		return name;
 	}
@@ -32,4 +28,37 @@ public class Person {
 		this.name = name;
 	}
 
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getPhoneNr() {
+		return phoneNr;
+	}
+
+	public void setPhoneNr(String phoneNr) {
+		this.phoneNr = phoneNr;
+	}
+
+	public String getPostalCode() {
+		return postalCode;
+	}
+
+	public void setPostalCode(String postalCode) {
+		this.postalCode = postalCode;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+	
+	
 }
