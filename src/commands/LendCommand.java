@@ -1,4 +1,4 @@
-package tui;
+package commands;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,11 +9,13 @@ import model.Copy;
 import model.LP;
 import model.Loan;
 import model.Person;
+import tui.Option;
+import tui.TextInput;
 import util.Util;
 
 public class LendCommand implements Option {
 	private LoanController loanController = new LoanController();
-	private String commandName = "Udlån LP";
+	private String commandName = "Udlï¿½n LP";
 
 	@Override
 	public void start() {
@@ -29,12 +31,12 @@ public class LendCommand implements Option {
 		displayLoanConfirmation(loanController.getLoan());
 
 		System.out.println();
-		System.out.println("Successfuld oprettede et nyt lån");
+		System.out.println("Successfuld oprettede et nyt lï¿½n");
 	}
 
 	public void findPersons() {
 		System.out.println("Find person med navn eller telefon");
-		ArrayList<Person> personArr = loanController.findPersons(TextInput.inputString("Søg"));
+		ArrayList<Person> personArr = loanController.findPersons(TextInput.inputString("Sï¿½g"));
 
 		for (int i = 0; i < personArr.size(); i++) {
 			System.out.println("(" + i + ") " + personArr.get(i).getName() + "\t: " + personArr.get(i).getPhoneNr());
@@ -44,7 +46,7 @@ public class LendCommand implements Option {
 	}
 
 	public void selectPerson() {
-		System.out.println("Vælg den ønskede person");
+		System.out.println("Vï¿½lg den ï¿½nskede person");
 		ArrayList<Person> personArr = loanController.getPersonArr();
 		boolean done = false;
 
@@ -72,8 +74,8 @@ public class LendCommand implements Option {
 	}
 
 	public void findLPs() {
-		System.out.println("Søg efter den ønskede LP");
-		ArrayList<LP> lpArr = loanController.findLPs(TextInput.inputString("Søg"));
+		System.out.println("Sï¿½g efter den ï¿½nskede LP");
+		ArrayList<LP> lpArr = loanController.findLPs(TextInput.inputString("Sï¿½g"));
 
 		for (int i = 0; i < lpArr.size(); i++) {
 			System.out.println("(" + i + ") " + lpArr.get(i).getTitle());
@@ -83,7 +85,7 @@ public class LendCommand implements Option {
 	}
 
 	public void selectLPs() {
-		System.out.println("Vælg den ønskede LP");
+		System.out.println("Vï¿½lg den ï¿½nskede LP");
 		ArrayList<LP> lpArr = loanController.getLpArr();
 		boolean done = false;
 
@@ -110,7 +112,7 @@ public class LendCommand implements Option {
 	}
 
 	public void selectCopy(LP lp) {
-		System.out.println("Vælg den ønskede kopi");
+		System.out.println("Vï¿½lg den ï¿½nskede kopi");
 		ArrayList<Copy> copyArr = loanController.getCopyArr();
 		Copy copy = null;
 
@@ -130,7 +132,7 @@ public class LendCommand implements Option {
 		Util.flush();
 		System.out.println("ID:\t\t[" + loan.getId() + "]");
 		System.out.println("Periode:\t[" + loan.getPeriod() + " dage]");
-		System.out.println("Låner telefon:\t[" + loan.getPerson().getPhoneNr() + "]");
+		System.out.println("Lï¿½ner telefon:\t[" + loan.getPerson().getPhoneNr() + "]");
 		System.out.println("serienummer:\t[" + loan.getCopy().getSerialNumber() + "]");
 	}
 

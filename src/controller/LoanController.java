@@ -1,6 +1,7 @@
 package controller;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import model.Copy;
@@ -29,16 +30,10 @@ public class LoanController {
 		loan = new Loan();
 	}
 	
-	public ArrayList<Person> findPersons(String input){
+	public List<Person> findPersons(String input){
 		PersonController personController = new PersonController();
-		Person[] persons = personController.findPerson(input);
-		personArr = new ArrayList<>();
-		
-		for (int i = 0; i < persons.length; i++) {
-			personArr.add(persons[i]);
-		}
-		
-		return personArr;
+		return personController.findPersons(input);
+
 	}
 	
 	public ArrayList<LP> findLPs(String title){

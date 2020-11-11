@@ -3,6 +3,7 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class PersonContainer {
 	private static PersonContainer instance;
@@ -30,14 +31,13 @@ public class PersonContainer {
 		persons.add(new Person("Alex", "24986881"));
 	}
 
-	public Person[] findPerson(String input) {
+	public List<Person> findPersons(String input) {
 		boolean isInt = input.matches("\\d+");
 		
-		Person[] personsFound = persons.stream()
+		return persons.stream()
 				.filter(p -> (isInt) ? p.getPhoneNr().contains(input) : p.getName().contains(input))
-				.toArray(Person[]::new);
-		
-		return personsFound;
+				.collect(Collectors.toList());
+
 	}
 	
 	public Person selectPerson(String id)
@@ -57,15 +57,21 @@ public class PersonContainer {
 	
 	public void updatePerson(String id, String name, String address, String phoneNr, String postalCode, String city)
 	{
-		
 		int index = persons.indexOf(selectPerson(id));
 
 		//Null check. If null, use the already set value
 		persons.get(index).setName((name == null || name.isEmpty()) ? persons.get(index).getName() : name);
-		persons.get(index).setName((address == null || address.isEmpty()) ? persons.get(index).getAddress() : address);
-		persons.get(index).setName((phoneNr == null || phoneNr.isEmpty()) ? persons.get(index).getPhoneNr() : phoneNr);
-		persons.get(index).setName((postalCode == null || postalCode.isEmpty()) ? persons.get(index).getPostalCode() : postalCode);
-		persons.get(index).setName((city == null || city.isEmpty()) ? persons.get(index).getCity() : city);
+		persons.get(index).setAddress((address == null || address.isEmpty()) ? persons.get(index).getAddress() : address);
+		persons.get(index).setPhoneNr((phoneNr == null || phoneNr.isEmpty()) ? persons.get(index).getPhoneNr() : phoneNr);
+		persons.get(index).setPostalCode((postalCode == null || postalCode.isEmpty()) ? persons.get(index).getPostalCode() : postalCode);
+		persons.get(index).setCity((city == null || city.isEmpty()) ? persons.get(index).getCity() : city);
 		
+	}
+	
+	public Person addPerson(String name, String address, String phoneNr, String postalCode, String city)
+	{
+		Person p = new Person(name,address, phoneNr, postalCode,city);
+		persons.add(p);
+		return p;
 	}
 }

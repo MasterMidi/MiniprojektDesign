@@ -37,7 +37,7 @@ public abstract class MenuUI<T extends Option> implements Option{
 		boolean done = false;
 
 		while (!done) {
-			int input = TextInput.inputNumber("Vælg");
+			int input = TextInput.inputNumber("Vï¿½lg");
 
 			if (input == 0) {
 				exit = true;

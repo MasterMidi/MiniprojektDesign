@@ -5,6 +5,7 @@ public class MainMenuUI extends MenuUI<Option>{
 		super("Main Menu");
 		
 		super.addOption(new LoanUI());
+		super.addOption(new PersonUI());
 
 		start();
 	}
