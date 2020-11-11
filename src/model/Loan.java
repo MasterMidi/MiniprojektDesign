@@ -3,15 +3,15 @@ package model;
 public class Loan {
 	private int period;
 	private String id;
-	private String serialNumber;
-	private String phoneNr;
+	private Copy copy;
+	private Person person;
 	
 	public Loan(String id, int period, String serialNumber, String phoneNr) {
 		super();
 		this.period = period;
 		this.id = id;
-		this.serialNumber = serialNumber;
-		this.phoneNr = phoneNr;
+//		this.serialNumber = serialNumber;
+//		this.phoneNr = phoneNr;
 	}
 	
 	public Loan() {
@@ -34,21 +34,37 @@ public class Loan {
 		this.id = id;
 	}
 
-	public String getSerialNumber() {
-		return serialNumber;
+	public Copy getCopy() {
+		return copy;
 	}
 
-	public void setSerialNumber(String serialNumber) {
-		this.serialNumber = serialNumber;
+	public void setCopy(Copy copy) {
+		this.copy = copy;
 	}
 
-	public String getPhoneNr() {
-		return phoneNr;
+	public Person getPerson() {
+		return person;
 	}
 
-	public void setPhoneNr(String phoneNr) {
-		this.phoneNr = phoneNr;
+	public void setPerson(Person person) {
+		this.person = person;
 	}
+
+//	public String getSerialNumber() {
+//		return serialNumber;
+//	}
+//
+//	public void setSerialNumber(String serialNumber) {
+//		this.serialNumber = serialNumber;
+//	}
+//
+//	public String getPhoneNr() {
+//		return phoneNr;
+//	}
+//
+//	public void setPhoneNr(String phoneNr) {
+//		this.phoneNr = phoneNr;
+//	}
 	
 	
 }

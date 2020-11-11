@@ -18,10 +18,10 @@ public class LendCommand implements ICommand {
 	@Override
 	public void execute() {
 		loanController.createLoan();
-		
+
 		Util.flush();
 		findPersons();
-		
+
 		Util.flush();
 		findLPs();
 
@@ -34,34 +34,36 @@ public class LendCommand implements ICommand {
 
 	public void findPersons() {
 		System.out.println("Find person med navn eller telefon");
-		Person[] persons = loanController.findPerson(TextInput.inputString("Søg"));
-		
-		for (int i = 0; i < persons.length; i++) {
-			System.out.println("(" + i + ") " + persons[i].getName() + "\t: " + persons[i].getPhoneNr());
+		ArrayList<Person> personArr = loanController.findPersons(TextInput.inputString("Søg"));
+
+		for (int i = 0; i < personArr.size(); i++) {
+			System.out.println("(" + i + ") " + personArr.get(i).getName() + "\t: " + personArr.get(i).getPhoneNr());
 		}
-		
+
 		selectPerson();
 	}
 
 	public void selectPerson() {
 		System.out.println("Vælg den ønskede person");
 		ArrayList<Person> personArr = loanController.getPersonArr();
-		Person person = null;
+		boolean done = false;
 
-		while (person == null) {
+		while (!done) {
 			int key = TextInput.inputNumber("Valg");
 			if (key < personArr.size()) {
-				loanController.linkPerson(personArr.get(key).getPhoneNr());
+				loanController.linkPerson(key);
+				done = true;
 			} else {
 				System.out.println("Ikke en mulighed");
 			}
 		}
-		
-		displayPerson(person);
+
+		displayPerson();
 	}
 
-	public void displayPerson(Person person) {
+	public void displayPerson() {
 		Util.flush();
+		Person person = loanController.getLoan().getPerson();
 		System.out.println("Navn:\t\t[" + person.getName() + "]");
 		System.out.println("Telefon:\t[" + person.getPhoneNr() + "]");
 		System.out.println("Addresse:\t[" + person.getAddress() + "]");
@@ -71,21 +73,21 @@ public class LendCommand implements ICommand {
 
 	public void findLPs() {
 		System.out.println("Søg efter den ønskede LP");
-		LP[] lps = loanController.findLP(TextInput.inputString("Søg"));
+		ArrayList<LP> lpArr = loanController.findLPs(TextInput.inputString("Søg"));
 
-		for (int i = 0; i < lps.length; i++) {
-			System.out.println("(" + i + ") " + lps[i].getTitle());
+		for (int i = 0; i < lpArr.size(); i++) {
+			System.out.println("(" + i + ") " + lpArr.get(i).getTitle());
 		}
-		
+
 		selectLPs();
 	}
 
 	public void selectLPs() {
 		System.out.println("Vælg den ønskede LP");
 		ArrayList<LP> lpArr = loanController.getLpArr();
-		LP lp = null;
+		boolean done = false;
 
-		while (lp == null) {
+		while (!done) {
 			int key = TextInput.inputNumber("Valg");
 			if (key < lpArr.size()) {
 				lp = lpArr.get(key);
@@ -94,12 +96,13 @@ public class LendCommand implements ICommand {
 			}
 		}
 
-		displayLP(lp);
-		selectCopy(lp);
+		displayLP();
+		//selectCopy(lp);
 	}
 
-	public void displayLP(LP lp) {
+	public void displayLP() {
 		Util.flush();
+		LP lp = loanController.getLoan().getPerson();
 		System.out.println("Title:\t\t[" + lp.getTitle() + "]");
 		System.out.println("Kunstner:\t[" + lp.getArtist() + "]");
 		System.out.println("Udgivelses dato:[" + lp.getPublicationDate() + "]");
@@ -127,8 +130,8 @@ public class LendCommand implements ICommand {
 		Util.flush();
 		System.out.println("ID:\t\t[" + loan.getId() + "]");
 		System.out.println("Periode:\t[" + loan.getPeriod() + " dage]");
-		System.out.println("Låner telefon:\t[" + loan.getPhoneNr() + "]");
-		System.out.println("serienummer:\t[" + loan.getSerialNumber() + "]");
+		System.out.println("Låner telefon:\t[" + loan.getPerson().getPhoneNr() + "]");
+		System.out.println("serienummer:\t[" + loan.getCopy().getSerialNumber() + "]");
 	}
 
 	@Override

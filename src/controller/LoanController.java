@@ -29,23 +29,28 @@ public class LoanController {
 		loan = new Loan();
 	}
 	
-	public Person[] findPerson(String input){
+	public ArrayList<Person> findPersons(String input){
 		PersonController personController = new PersonController();
 		Person[] persons = personController.findPerson(input);
 		personArr = new ArrayList<>();
 		
 		for (int i = 0; i < persons.length; i++) {
-			System.out.println("(" + i + ") " + persons[i].getName() + "\t: " + persons[i].getPhoneNr());
+			personArr.add(persons[i]);
 		}
 		
-		return persons;
+		return personArr;
 	}
 	
-	public LP[] findLP(String title){
+	public ArrayList<LP> findLPs(String title){
 		LPController lpController = new LPController();
+		LP[] lps = lpController.findLP(title);
+		lpArr = new ArrayList<>();
 		
-		return lpController.findLP(title);
+		for (int i = 0; i < lps.length; i++) {
+			lpArr.add(lps[i]);
+		}
 		
+		return lpArr;
 	}
 	
 	public Loan lendCopy(int period, String serialNumber, String phoneNr) {
@@ -56,12 +61,12 @@ public class LoanController {
 		return loan;
 	}
 	
-	public void linkPerson(String phoneNr) {
-		loan.setPhoneNr(phoneNr);
+	public void linkPerson(int index) {
+		loan.setPerson(personArr.get(index));
 	}
 	
-	public void linkCopy(String serialNumber) {
-		loan.setSerialNumber(serialNumber);
+	public void linkCopy(int index) {
+		loan.setCopy(copyArr.get(index));
 	}
 	
 	public Loan getLoan() {

@@ -1,6 +1,7 @@
 package model;
 
 public class Copy {
+	private LP parentLP;
 	private String serialNumber;
 	private String purchaseDate;
 	private String purchasePrice;
