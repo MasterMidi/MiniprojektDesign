@@ -14,4 +14,9 @@ public class PersonController {
 		return personContainer.findPerson(input);
 		
 	}
+	
+	public Person selectPerson(String id)
+	{
+		return personContainer.selectPerson(id);
+	}
 }
