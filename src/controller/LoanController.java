@@ -1,7 +1,6 @@
 package controller;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 import model.Copy;
@@ -30,13 +29,20 @@ public class LoanController {
 		loan = new Loan();
 	}
 	
-	public List<Person> findPersons(String input){
+	
+	public ArrayList<Person> findPersons(String input){ //TODO flyt til metode under PersonController
 		PersonController personController = new PersonController();
-		return personController.findPersons(input);
-
+		Person[] persons = personController.findPerson(input);
+		personArr = new ArrayList<>();
+		
+		for (int i = 0; i < persons.length; i++) {
+			personArr.add(persons[i]);
+		}
+		
+		return personArr;
 	}
 	
-	public ArrayList<LP> findLPs(String title){
+	public ArrayList<LP> findLPs(String title){ //TODO flyt til metode under LPController
 		LPController lpController = new LPController();
 		LP[] lps = lpController.findLP(title);
 		lpArr = new ArrayList<>();
@@ -50,7 +56,7 @@ public class LoanController {
 	
 	public Loan lendCopy(int period, String serialNumber, String phoneNr) {
 		Random rnd = new Random();
-		loan = new Loan("" + rnd.nextInt(10000), period, serialNumber, phoneNr);
+		loan = new Loan("" + rnd.nextInt(10000), period);
 		loanContainer.addLoan(loan);
 		
 		return loan;

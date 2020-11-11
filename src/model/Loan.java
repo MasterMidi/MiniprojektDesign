@@ -6,16 +6,14 @@ public class Loan {
 	private Copy copy;
 	private Person person;
 	
-	public Loan(String id, int period, String serialNumber, String phoneNr) {
+	public Loan(String id, int period) {
 		super();
 		this.period = period;
 		this.id = id;
-//		this.serialNumber = serialNumber;
-//		this.phoneNr = phoneNr;
 	}
 	
 	public Loan() {
-		this(null, 0, null, null);
+		this(null, 0);
 	}
 
 	public int getPeriod() {
