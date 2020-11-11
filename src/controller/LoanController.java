@@ -29,7 +29,8 @@ public class LoanController {
 		loan = new Loan();
 	}
 	
-	public ArrayList<Person> findPersons(String input){
+	
+	public ArrayList<Person> findPersons(String input){ //TODO flyt til metode under PersonController
 		PersonController personController = new PersonController();
 		Person[] persons = personController.findPerson(input);
 		personArr = new ArrayList<>();
@@ -41,7 +42,7 @@ public class LoanController {
 		return personArr;
 	}
 	
-	public ArrayList<LP> findLPs(String title){
+	public ArrayList<LP> findLPs(String title){ //TODO flyt til metode under LPController
 		LPController lpController = new LPController();
 		LP[] lps = lpController.findLP(title);
 		lpArr = new ArrayList<>();
@@ -55,7 +56,7 @@ public class LoanController {
 	
 	public Loan lendCopy(int period, String serialNumber, String phoneNr) {
 		Random rnd = new Random();
-		loan = new Loan("" + rnd.nextInt(10000), period, serialNumber, phoneNr);
+		loan = new Loan("" + rnd.nextInt(10000), period);
 		loanContainer.addLoan(loan);
 		
 		return loan;

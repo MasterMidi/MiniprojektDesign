@@ -21,8 +21,6 @@ public class LendCommand implements Option {
 
 		Util.flush();
 		findPersons();
-
-		Util.flush();
 		findLPs();
 
 		Util.flush();
@@ -90,24 +88,25 @@ public class LendCommand implements Option {
 		while (!done) {
 			int key = TextInput.inputNumber("Valg");
 			if (key < lpArr.size()) {
-				lp = lpArr.get(key);
+				//lp = lpArr.get(key);
+				done = true;
 			} else {
 				System.out.println("Ikke en mulighed");
 			}
 		}
 
-		displayLP();
+		//displayLP();
 		//selectCopy(lp);
 	}
 
-	public void displayLP() {
-		Util.flush();
-		LP lp = loanController.getLoan().getPerson();
-		System.out.println("Title:\t\t[" + lp.getTitle() + "]");
-		System.out.println("Kunstner:\t[" + lp.getArtist() + "]");
-		System.out.println("Udgivelses dato:[" + lp.getPublicationDate() + "]");
-		System.out.println("Stregkode:\t[" + lp.getBarcode() + "]");
-	}
+//	public void displayLP() {
+//		Util.flush();
+//		LP lp = loanController.getLoan().getPerson();
+//		System.out.println("Title:\t\t[" + lp.getTitle() + "]");
+//		System.out.println("Kunstner:\t[" + lp.getArtist() + "]");
+//		System.out.println("Udgivelses dato:[" + lp.getPublicationDate() + "]");
+//		System.out.println("Stregkode:\t[" + lp.getBarcode() + "]");
+//	}
 
 	public void selectCopy(LP lp) {
 		System.out.println("Vælg den ønskede kopi");
@@ -123,7 +122,7 @@ public class LendCommand implements Option {
 			}
 		}
 
-		loanController.linkCopy(copy.getSerialNumber());
+		//loanController.linkCopy(copy.getSerialNumber());
 	}
 
 	public void displayLoanConfirmation(Loan loan) {
