@@ -15,6 +15,9 @@ public class DeletePersonCommand implements Option {
 	String name;
 
 	@Override
+	/**
+	 * executes the command. First finds persons based on input, afterwards the actor chooses the person. After this, a promt will be shown to confirm deletion.
+	 */
 	public void start() {
 
 		Util.flush();
@@ -39,6 +42,10 @@ public class DeletePersonCommand implements Option {
 
 	}
 
+	
+	/**
+	 * Function used for displaying a list of available person from the "persons" variable
+	 */
 	public void findPersons() {
 		System.out.println("Find person med navn eller telefon");
 		for (int i = 0; i < persons.size(); i++) {
@@ -63,6 +70,9 @@ public class DeletePersonCommand implements Option {
 		return id;
 	}
 
+	/**
+	 * displays a persons information
+	 */
 	public void displayPerson(String id) {
 		Util.flush();
 		Person person = controller.selectPerson(id);
@@ -75,6 +85,9 @@ public class DeletePersonCommand implements Option {
 	}
 
 	@Override
+	/**
+	 * Set the description of the UI
+	 */
 	public String getDescription() {
 		// TODO Auto-generated method stub
 		return "Slet Person";

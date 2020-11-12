@@ -14,6 +14,9 @@ public class ReadPersonCommand implements Option {
 	PersonController controller;
 
 	@Override
+/**
+ * Executes command. prints out information about users. Users are found via the "input" variable
+ */
 	public void start() {
 
 		controller = new PersonController();
@@ -48,6 +51,9 @@ public class ReadPersonCommand implements Option {
 	}
 
 	@Override
+	/**
+	 * Set the description of the UI
+	 */
 	public String getDescription() {
 
 		return "Søg Personer";

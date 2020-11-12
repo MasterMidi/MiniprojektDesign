@@ -15,6 +15,9 @@ public class UpdatePersonCommand implements Option {
 	String id;
 
 	@Override
+	/**
+	 * Executes command. Updates a person. Does this by making the actor search for users, and then select a singular one to find the ID. 
+	 */
 	public void start() {
 
 		Util.flush();
@@ -39,6 +42,9 @@ public class UpdatePersonCommand implements Option {
 
 	}
 
+	/**
+	 * Allows selection of a user, from the persons variable
+	 */
 	public void findPersons() {
 		System.out.println("Find person med navn eller telefon");
 		for (int i = 0; i < persons.size(); i++) {
@@ -46,6 +52,10 @@ public class UpdatePersonCommand implements Option {
 		}
 	}
 
+	/**
+	 * Makes the actor choose a user.
+	 * @return person which were selected
+	 */
 	public Person selectPerson() {
 		System.out.println("V�lg den �nskede person");
 		Person person = null;
@@ -67,6 +77,9 @@ public class UpdatePersonCommand implements Option {
 	
 
 	@Override
+	/**
+	 * Set the description of the UI
+	 */
 	public String getDescription() {
 		// TODO Auto-generated method stub
 		return "Opdater Person";

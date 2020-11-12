@@ -11,7 +11,7 @@ import util.Util;
 public class PersonUI extends MenuUI<Option> {
 	
 	public PersonUI() {
-		super("Manage Person");
+		super("håndter Personer");
 		
 		super.addOption(new CreatePersonCommand());
 		super.addOption(new ReadPersonCommand());
@@ -21,6 +21,9 @@ public class PersonUI extends MenuUI<Option> {
 	}
 	
 	@Override
+	/**
+	 * Show which options the interface has
+	 */
 	public void printOptions() {
 		Util.flush();
 		System.out.println("****** " + getDescription() + " ******");
