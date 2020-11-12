@@ -39,6 +39,7 @@ public class ReadPersonCommand implements Option {
 
 				if (!it.hasNext())
 					System.out.println("=========================================================");
+				
 			}
 		} else {
 			System.out.println(String.format("Systemet kunne ikke finde nogle personer, med '%s' som input.", input));

@@ -21,16 +21,17 @@ public class PersonController {
 		return personContainer.selectPerson(id);
 	}
 
-	public Person CreatePerson(String name, String address, String phoneNr, String postalCode, String city) {
-		return personContainer.addPerson(name, address, phoneNr, postalCode, city);
+	public boolean CreatePerson(String name, String address, String phoneNr, String postalCode, String city) {
+		Person person = new Person(name, address, phoneNr, postalCode, city);
+		return personContainer.addPerson(person	);
 	}
 
 	public Person getPerson(String id) {
 		return personContainer.selectPerson(id);
 	}
 
-	public void updatePerson(String id, String name, String address, String phoneNr, String postalCode, String city) {
-		personContainer.updatePerson(id, name, address, phoneNr, postalCode, city);
+	public boolean updatePerson(String id, String name, String address, String phoneNr, String postalCode, String city) {
+		return personContainer.updatePerson(id, name, address, phoneNr, postalCode, city);
 	}
 
 	public void deletePerson(String id) {

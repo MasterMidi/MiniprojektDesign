@@ -19,8 +19,8 @@ public class PersonContainer {
 
 	private PersonContainer() {
 		persons = new ArrayList<>();
-		
-		//Dummy data
+
+		// Dummy data
 		persons.add(new Person("Michael", "24267667"));
 		persons.add(new Person("Anders", "41398413"));
 		persons.add(new Person("Jannie", "30616515"));
@@ -33,57 +33,51 @@ public class PersonContainer {
 
 	public List<Person> findPersons(String input) {
 		boolean isInt = input.matches("\\d+");
-		
-		return persons.stream()
-				.filter(p -> (isInt) ? p.getPhoneNr().contains(input) : p.getName().toLowerCase().contains(input.toLowerCase()))
+
+		return persons.stream().filter(
+				p -> (isInt) ? p.getPhoneNr().contains(input) : p.getName().toLowerCase().contains(input.toLowerCase()))
 				.collect(Collectors.toList());
 
 	}
-	
-	public Person selectPerson(String id)
-	{
-		Optional<Person> person = persons.stream()
-				.filter(p -> p.getPhoneNr().equals(id)).findFirst();
-		
-		return person.get();
-		
-	}
-	
-	public void deletePerson(String id)
-	{
-		persons.remove(selectPerson(id));
-		
-	}
-	
-	public void updatePerson(String id, String name, String address, String phoneNr, String postalCode, String city)
-	{
-		System.out.println(name);
-		Person p = selectPerson(id);
-		
-		String t = (p == null) ? "P er null!" : "p er ikke null!";
-		
-		System.out.println(t);
-		
-		
-		System.out.println("Name: " + p.getName());
-		
-		int index = persons.indexOf(p);
-		
-		System.out.println("Index: " + index);
 
-		//Null check. If null, use the already set value
-		persons.get(index).setName((name == null || name.isEmpty()) ? persons.get(index).getName() : name);
-		persons.get(index).setAddress((address == null || address.isEmpty()) ? persons.get(index).getAddress() : address);
-		persons.get(index).setPhoneNr((phoneNr == null || phoneNr.isEmpty()) ? persons.get(index).getPhoneNr() : phoneNr);
-		persons.get(index).setPostalCode((postalCode == null || postalCode.isEmpty()) ? persons.get(index).getPostalCode() : postalCode);
-		persons.get(index).setCity((city == null || city.isEmpty()) ? persons.get(index).getCity() : city);
-		
+	public Person selectPerson(String id) {
+		Optional<Person> person = persons.stream().filter(p -> p.getPhoneNr().equals(id)).findFirst();
+
+		return person.get();
+
 	}
-	
-	public Person addPerson(String name, String address, String phoneNr, String postalCode, String city)
-	{
-		Person p = new Person(name,address, phoneNr, postalCode,city);
-		persons.add(p);
-		return p;
+
+	public void deletePerson(String id) {
+		persons.remove(selectPerson(id));
+
+	}
+
+	public boolean updatePerson(String id, String name, String address, String phoneNr, String postalCode,String city) {
+		try {
+			int index = persons.indexOf(selectPerson(id));
+
+			// Null check. If null, use the already set value
+			persons.get(index)
+					.setName((name == null || name.isEmpty()) ? persons.get(index).getName() : name);
+			persons.get(index)
+					.setAddress((address == null || address.isEmpty()) ? persons.get(index).getAddress() : address);
+			persons.get(index)
+					.setPhoneNr((phoneNr == null || phoneNr.isEmpty()) ? persons.get(index).getPhoneNr() : phoneNr);
+			persons.get(index)
+					.setPostalCode(
+					(postalCode == null || postalCode.isEmpty()) ? persons.get(index).getPostalCode() : postalCode);
+			persons.get(index)
+					.setCity((city == null || city.isEmpty()) ? persons.get(index).getCity() : city);
+			
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+		
+
+	}
+
+	public boolean addPerson(Person person) {
+		return persons.add(person);
 	}
 }
