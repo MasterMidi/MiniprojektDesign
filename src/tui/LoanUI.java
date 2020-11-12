@@ -5,7 +5,7 @@ import java.util.Iterator;
 import commands.LendCommand;
 import util.Util;
 
-public class LoanUI extends MenuUI<Option>{
+public class LoanUI extends MenuUI{
 	public LoanUI() {
 		super("Låner Menu");
 		

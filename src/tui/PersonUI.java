@@ -8,7 +8,7 @@ import commands.ReadPersonCommand;
 import commands.UpdatePersonCommand;
 import util.Util;
 
-public class PersonUI extends MenuUI<Option> {
+public class PersonUI extends MenuUI {
 	
 	public PersonUI() {
 		super("håndter Personer");
