@@ -46,7 +46,6 @@ public class PersonContainer {
 				.filter(p -> p.getPhoneNr().equals(id)).findFirst();
 		
 		return person.get();
-		
 	}
 	
 	public void deletePerson(String id)

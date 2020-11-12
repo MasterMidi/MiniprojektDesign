@@ -27,8 +27,6 @@ public class CreatePersonCommand implements Option {
 		controller.CreatePerson(name, address, Integer.toString(phoneNr), postalCode, city);
 		
 	}
-	
-	
 
 	@Override
 	public String getDescription() {
