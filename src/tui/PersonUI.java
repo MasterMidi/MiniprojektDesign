@@ -25,7 +25,6 @@ public class PersonUI extends MenuUI<Option> {
 	 * Show which options the interface has
 	 */
 	public void printOptions() {
-		Util.flush();
 		System.out.println("****** " + getDescription() + " ******");
 		System.out.println("(0) Tilbage");
 

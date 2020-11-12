@@ -37,7 +37,7 @@ public abstract class MenuUI<T extends Option> implements Option{
 		boolean done = false;
 
 		while (!done) {
-			int input = TextInput.inputNumber("V�lg");
+			int input = TextInput.inputNumber("Vælg");
 
 			if (input == 0) {
 				exit = true;
@@ -61,7 +61,6 @@ public abstract class MenuUI<T extends Option> implements Option{
 	}
 
 	public void printOptions() {
-		Util.flush();
 		System.out.println("****** " + description + " ******");
 		System.out.println("(0) Log af");
 
