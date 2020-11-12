@@ -1,8 +1,7 @@
 package commands;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 import controller.LoanController;
 import model.Copy;
@@ -34,18 +33,16 @@ public class LendCommand implements Option {
 
 	public void findPersons() {
 		System.out.println("Find person med navn eller telefon");
-		ArrayList<Person> personArr = loanController.findPersons(TextInput.inputString("Søg"));
+		String persons = loanController.findPersons(TextInput.inputString("Søg"));
 
-		for (int i = 0; i < personArr.size(); i++) {
-			System.out.println("(" + i + ") " + personArr.get(i).getName() + "\t: " + personArr.get(i).getPhoneNr());
-		}
+		System.out.println(persons);
 
-		selectPerson();
+		//selectPerson();
 	}
 
 	public void selectPerson() {
 		System.out.println("Vælg den ønskede person");
-		ArrayList<Person> personArr = loanController.getPersonArr();
+		List<Person> personArr = loanController.getPersonList();
 		boolean done = false;
 
 		while (!done) {
@@ -73,7 +70,7 @@ public class LendCommand implements Option {
 
 	public void findLPs() {
 		System.out.println("Søg efter den ønskede LP");
-		ArrayList<LP> lpArr = loanController.findLPs(TextInput.inputString("Søg"));
+		List<LP> lpArr = loanController.findLPs(TextInput.inputString("Søg"));
 
 		for (int i = 0; i < lpArr.size(); i++) {
 			System.out.println("(" + i + ") " + lpArr.get(i).getTitle());
@@ -84,7 +81,7 @@ public class LendCommand implements Option {
 
 	public void selectLPs() {
 		System.out.println("Vælg den ønskede LP");
-		ArrayList<LP> lpArr = loanController.getLpArr();
+		List<LP> lpArr = loanController.getLpArr();
 		boolean done = false;
 
 		while (!done) {
@@ -112,7 +109,7 @@ public class LendCommand implements Option {
 
 	public void selectCopy(LP lp) {
 		System.out.println("Vælg den ønskede kopi");
-		ArrayList<Copy> copyArr = loanController.getCopyArr();
+		List<Copy> copyArr = loanController.getCopyArr();
 		Copy copy = null;
 
 		while (copy == null) {

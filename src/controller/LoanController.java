@@ -1,6 +1,7 @@
 package controller;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import model.Copy;
@@ -13,16 +14,16 @@ public class LoanController {
 	private LoanContainer loanContainer;
 	private Loan loan;
 	
-	private ArrayList<Person> personArr;
-	private ArrayList<LP> lpArr;
-	private ArrayList<Copy> copyArr;
+	private List<Person> personList;
+	private List<LP> lpList;
+	private List<Copy> copyList;
 	
 	public LoanController() {
 		loanContainer = LoanContainer.getInstance();
 		
-		personArr = new ArrayList<>();
-		lpArr = new ArrayList<>();
-		copyArr = new ArrayList<>();
+		personList = new ArrayList<>();
+		lpList = new ArrayList<>();
+		copyList = new ArrayList<>();
 	}
 	
 	public void createLoan() {
@@ -30,28 +31,23 @@ public class LoanController {
 	}
 	
 	
-	public ArrayList<Person> findPersons(String input){ //TODO flyt til metode under PersonController
+	public String findPersons(String input){ //TODO flyt til metode under PersonController
 		PersonController personController = new PersonController();
-		Person[] persons = personController.findPerson(input);
-		personArr = new ArrayList<>();
+		personList = personController.findPersons(input);
 		
-		for (int i = 0; i < persons.length; i++) {
-			personArr.add(persons[i]);
-		}
-		
-		return personArr;
+		return personController.displayPersonList(personList);
 	}
 	
-	public ArrayList<LP> findLPs(String title){ //TODO flyt til metode under LPController
+	public List<LP> findLPs(String title){ //TODO flyt til metode under LPController
 		LPController lpController = new LPController();
 		LP[] lps = lpController.findLP(title);
-		lpArr = new ArrayList<>();
+		lpList = new ArrayList<>();
 		
 		for (int i = 0; i < lps.length; i++) {
-			lpArr.add(lps[i]);
+			lpList.add(lps[i]);
 		}
 		
-		return lpArr;
+		return lpList;
 	}
 	
 	public Loan lendCopy(int period, String serialNumber, String phoneNr) {
@@ -63,38 +59,38 @@ public class LoanController {
 	}
 	
 	public void linkPerson(int index) {
-		loan.setPerson(personArr.get(index));
+		loan.setPerson(personList.get(index));
 	}
 	
 	public void linkCopy(int index) {
-		loan.setCopy(copyArr.get(index));
+		loan.setCopy(copyList.get(index));
 	}
 	
 	public Loan getLoan() {
 		return loan;
 	}
 
-	public ArrayList<Person> getPersonArr() {
-		return personArr;
+	public List<Person> getPersonList() {
+		return personList;
 	}
 
 	public void setPersonArr(ArrayList<Person> personArr) {
-		this.personArr = personArr;
+		this.personList = personArr;
 	}
 
-	public ArrayList<LP> getLpArr() {
-		return lpArr;
+	public List<LP> getLpArr() {
+		return lpList;
 	}
 
 	public void setLpArr(ArrayList<LP> lpArr) {
-		this.lpArr = lpArr;
+		this.lpList = lpArr;
 	}
 
-	public ArrayList<Copy> getCopyArr() {
-		return copyArr;
+	public List<Copy> getCopyArr() {
+		return copyList;
 	}
 
 	public void setCopyArr(ArrayList<Copy> copyArr) {
-		this.copyArr = copyArr;
+		this.copyList = copyArr;
 	}
 }

@@ -7,7 +7,7 @@ import util.Util;
 
 public class LoanUI extends MenuUI<Option>{
 	public LoanUI() {
-		super("L�ner Menu");
+		super("Låner Menu");
 		
 		super.addOption(new LendCommand());
 	}
@@ -20,10 +20,7 @@ public class LoanUI extends MenuUI<Option>{
 
 		Iterator<Option> it = super.getOptions().iterator();
 		for (int i = 0; i < super.getOptions().size() && it.hasNext(); i++) {
-			System.out.println("(" + (i + 1) + ") " + it.next().getDescription());
-			
-			
-			String formatted = String.format("({0}) {1}", (i + 1), it.next().getDescription());
+			String formatted = String.format("(%s) %s", (i + 1), it.next().getDescription());
 			System.out.println(formatted);
 			
 		}
