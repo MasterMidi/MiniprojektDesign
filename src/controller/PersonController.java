@@ -16,6 +16,16 @@ public class PersonController {
 		return personContainer.findPersons(input);
 
 	}
+	
+	public String displayPersonList(List<Person> persons) {
+		StringBuilder formatted = new StringBuilder();
+		
+		for (int i = 0; i < persons.size(); i++) {
+			formatted.append("(" + i + ") " + persons.get(i).getName() + "\t: " + persons.get(i).getPhoneNr() + "\n");
+		}
+		
+		return formatted.toString();
+	}
 
 	public Person selectPerson(String id) {
 		return personContainer.selectPerson(id);

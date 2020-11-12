@@ -7,15 +7,28 @@ public class Copy {
 	private String purchasePrice;
 	private boolean borrowed;
 	
-	public Copy(String serialNumber, String purchaseDate, String purchasePrice, boolean borrowed) {
+	public Copy(LP parentLP, String serialNumber, String purchaseDate, String purchasePrice, boolean borrowed) {
+		this.parentLP = parentLP;
 		this.serialNumber = serialNumber;
 		this.purchaseDate = purchaseDate;
 		this.purchasePrice = purchasePrice;
 		this.borrowed = borrowed;
 	}
 
+	/**
+	 * Dummy Copy, kun til simple tests
+	 * @param serialNumber
+	 */
 	public Copy(String serialNumber) {
-		this(serialNumber, null, null, false);
+		this(null, serialNumber, null, null, false);
+	}
+
+	public LP getParentLP() {
+		return parentLP;
+	}
+
+	public void setParentLP(LP parentLP) {
+		this.parentLP = parentLP;
 	}
 
 	public String getSerialNumber() {

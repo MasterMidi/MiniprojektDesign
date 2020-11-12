@@ -15,11 +15,12 @@ public class TextInput {
 	}
 
 	public static int inputNumber(String question) {
+		@SuppressWarnings("resource")
 		Scanner keyboard = new Scanner(System.in);
 		int number = 0;
 		printQuestion(question);
 		while (!keyboard.hasNextInt()) {
-			System.out.println("Input skal være et tal - prøv igen");
+			System.out.println("Input skal vÃ¦re et tal - prÃ¸v igen");
 			keyboard.nextLine();
 			printQuestion(question);
 		}
@@ -28,6 +29,7 @@ public class TextInput {
 	}
 
 	public static String inputString(String question) {
+		@SuppressWarnings("resource")
 		Scanner keyboard = new Scanner(System.in);
 		printQuestion(question);
 		String input = keyboard.nextLine();

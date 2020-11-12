@@ -1,8 +1,7 @@
 package commands;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Iterator;
+import java.util.List;
 
 import controller.LoanController;
 import model.Copy;
@@ -15,55 +14,53 @@ import util.Util;
 
 public class LendCommand implements Option {
 	private LoanController loanController = new LoanController();
-	private String commandName = "Udl�n LP";
+	private String commandName = "Udlån LP";
 
 	@Override
 	public void start() {
 		loanController.createLoan();
 
-		Util.flush();
 		findPersons();
+		selectPerson();
 		findLPs();
-
-		Util.flush();
-		displayLoanConfirmation(loanController.getLoan());
+		selectLP();
+		selectCopy();
+		
+		displayLoan(loanController.getLoan());
 
 		System.out.println();
-		System.out.println("Successfuld oprettede et nyt l�n");
+		System.out.println("Successfuld oprettede et nyt løn");
 	}
 
 	public void findPersons() {
+		Util.flush();
 		System.out.println("Find person med navn eller telefon");
-		ArrayList<Person> personArr = loanController.findPersons(TextInput.inputString("S�g"));
+		String personListFormatted = loanController.findPersons(TextInput.inputString("Søg"));
 
-		for (int i = 0; i < personArr.size(); i++) {
-			System.out.println("(" + i + ") " + personArr.get(i).getName() + "\t: " + personArr.get(i).getPhoneNr());
-		}
-
-		selectPerson();
+		System.out.println(personListFormatted);
 	}
 
 	public void selectPerson() {
-		System.out.println("V�lg den �nskede person");
-		ArrayList<Person> personArr = loanController.getPersonArr();
+		System.out.println("Vælg den ønskede person");
+		List<Person> personList = loanController.getPersonList();
+		Person person = null;
 		boolean done = false;
 
 		while (!done) {
 			int key = TextInput.inputNumber("Valg");
-			if (key < personArr.size()) {
-				loanController.linkPerson(key);
+			if (key < personList.size()) {
+				person = loanController.selectPerson(key);
 				done = true;
 			} else {
 				System.out.println("Ikke en mulighed");
 			}
 		}
 
-		displayPerson();
+		displayPerson(person);
 	}
 
-	public void displayPerson() {
+	public void displayPerson(Person person) {
 		Util.flush();
-		Person person = loanController.getLoan().getPerson();
 		System.out.println("Navn:\t\t[" + person.getName() + "]");
 		System.out.println("Telefon:\t[" + person.getPhoneNr() + "]");
 		System.out.println("Addresse:\t[" + person.getAddress() + "]");
@@ -72,66 +69,77 @@ public class LendCommand implements Option {
 	}
 
 	public void findLPs() {
-		System.out.println("S�g efter den �nskede LP");
-		ArrayList<LP> lpArr = loanController.findLPs(TextInput.inputString("S�g"));
+		System.out.println("Søg efter den ønskede LP");
+		String lpListFormatted = loanController.findLPs(TextInput.inputString("Søg"));
+		//String copyListFormatted = loanController.
 
-		for (int i = 0; i < lpArr.size(); i++) {
-			System.out.println("(" + i + ") " + lpArr.get(i).getTitle());
-		}
-
-		selectLPs();
+		System.out.println(lpListFormatted);
 	}
 
-	public void selectLPs() {
-		System.out.println("V�lg den �nskede LP");
-		ArrayList<LP> lpArr = loanController.getLpArr();
+	public void selectLP() {
+		System.out.println("Vælg den ønskede LP");
+		List<LP> lpList = loanController.getLpList();
+		LP lp = null;
 		boolean done = false;
 
 		while (!done) {
 			int key = TextInput.inputNumber("Valg");
-			if (key < lpArr.size()) {
-				//lp = lpArr.get(key);
+			if (key < lpList.size()) {
+				lp = loanController.selectLP(key);
 				done = true;
 			} else {
 				System.out.println("Ikke en mulighed");
 			}
 		}
 
-		//displayLP();
-		//selectCopy(lp);
+		displayLP(lp);
 	}
 
-//	public void displayLP() {
-//		Util.flush();
-//		LP lp = loanController.getLoan().getPerson();
-//		System.out.println("Title:\t\t[" + lp.getTitle() + "]");
-//		System.out.println("Kunstner:\t[" + lp.getArtist() + "]");
-//		System.out.println("Udgivelses dato:[" + lp.getPublicationDate() + "]");
-//		System.out.println("Stregkode:\t[" + lp.getBarcode() + "]");
-//	}
+	public void displayLP(LP lp) {
+		Util.flush();
+		System.out.println("Title:\t\t[" + lp.getTitle() + "]");
+		System.out.println("Kunstner:\t[" + lp.getArtist() + "]");
+		System.out.println("Udgivelses dato:[" + lp.getPublicationDate() + "]");
+		System.out.println("Stregkode:\t[" + lp.getBarcode() + "]");
+		
+		displayCopy();
+	}
+	
+	public void displayCopy() {
+		List<Copy> copyList = loanController.getCopyList();
+		
+		Iterator<Copy> it = copyList.iterator();
+		for(int i = 0; it.hasNext(); i++) {
+			System.out.println("(" + i + ") " + it.next().getSerialNumber());
+		}
+	}
 
-	public void selectCopy(LP lp) {
-		System.out.println("V�lg den �nskede kopi");
-		ArrayList<Copy> copyArr = loanController.getCopyArr();
-		Copy copy = null;
+	public void selectCopy() {
+		System.out.println("Vælg den ønskede kopi");
+		List<Copy> copyList = loanController.getCopyList();
+		boolean done = false;
 
-		while (copy == null) {
+		while (!done) {
 			int key = TextInput.inputNumber("Valg");
-			if (key < copyArr.size()) {
-				copy = copyArr.get(key);
+			if (key >= 0 && key < copyList.size()) {
+				loanController.selectCopy(key);
+				done = true;
 			} else {
 				System.out.println("Ikke en mulighed");
 			}
 		}
-
-		//loanController.linkCopy(copy.getSerialNumber());
 	}
 
-	public void displayLoanConfirmation(Loan loan) {
+	/**
+	 * Displays loan information in a formatted way. 
+	 * @param loan the loan which is to be displayed
+	 */
+	public void displayLoan(Loan loan) {
 		Util.flush();
+		System.out.println("Created new loan!\n");
 		System.out.println("ID:\t\t[" + loan.getId() + "]");
 		System.out.println("Periode:\t[" + loan.getPeriod() + " dage]");
-		System.out.println("L�ner telefon:\t[" + loan.getPerson().getPhoneNr() + "]");
+		System.out.println("Låner telefon:\t[" + loan.getPerson().getPhoneNr() + "]");
 		System.out.println("serienummer:\t[" + loan.getCopy().getSerialNumber() + "]");
 	}
 

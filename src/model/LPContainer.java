@@ -2,6 +2,7 @@ package model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LPContainer {
 	private static LPContainer instance;
@@ -25,10 +26,10 @@ public class LPContainer {
 		lps.add(new LP("Back to Black"));
 	}
 	
-	public LP[] findLP(String title) {
-		LP[] lpsFound = lps.stream()
+	public List<LP> findLPs(String title) {
+		List<LP> lpsFound = lps.stream()
 				.filter(lp -> lp.getTitle().contains(title))
-				.toArray(LP[]::new);
+				.collect(Collectors.toList());
 
 		return lpsFound;
 	}

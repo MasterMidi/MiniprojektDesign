@@ -1,9 +1,10 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class LP {
-	private ArrayList<Copy> copies;
+	private List<Copy> copies;
 	private String title;
 	private String artist;
 	private String barcode;
@@ -18,12 +19,12 @@ public class LP {
 		
 		copies = new ArrayList<>();
 		
-		copies.add(new Copy("3192380192"));
-		copies.add(new Copy("2547398573"));
-		copies.add(new Copy("2347956744"));
-		copies.add(new Copy("8912398795"));
-		copies.add(new Copy("1237497433"));
-		copies.add(new Copy("4129085238"));
+//		copies.add(new Copy("3192380192"));
+//		copies.add(new Copy("2547398573"));
+//		copies.add(new Copy("2347956744"));
+//		copies.add(new Copy("8912398795"));
+//		copies.add(new Copy("1237497433"));
+//		copies.add(new Copy("4129085238"));
 	}
 	
 	public void addCopy(Copy copy) {
@@ -34,13 +35,8 @@ public class LP {
 		copies.remove(copy);
 	}
 	
-	public Copy findCopy(String serialNumber) {
-		return null;
-		
-	}
-	
-	public Copy[] getCopies() {
-		return copies.toArray(Copy[]::new);
+	public List<Copy> getCopies() {
+		return new ArrayList<>(copies);
 	}
 	
 	public LP(String title) {
