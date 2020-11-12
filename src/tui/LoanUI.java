@@ -14,7 +14,6 @@ public class LoanUI extends MenuUI<Option>{
 	
 	@Override
 	public void printOptions() {
-		Util.flush();
 		System.out.println("****** " + getDescription() + " ******");
 		System.out.println("(0) Tilbage");
 

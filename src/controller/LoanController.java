@@ -17,10 +17,6 @@ public class LoanController {
 	private List<Person> personList;
 	private List<LP> lpList;
 	private List<Copy> copyList;
-	
-	private Person person;
-	private LP lp;
-	private Copy copy;
 
 	public LoanController() {
 		loanContainer = LoanContainer.getInstance();
@@ -35,39 +31,47 @@ public class LoanController {
 		loan = new Loan("" + rnd.nextInt(10000), 7);
 	}
 
-	public String findPersons(String input) {
+	public String findPersons(String input) throws Exception {
 		PersonController personController = new PersonController();
 		personList = personController.findPersons(input);
 
+		if(personList.isEmpty()) {
+			throw new Exception("No matching person");
+		}
+		
 		return personController.displayPersonList(personList);
 	}
 
-	public String findLPs(String title) {
+	public String findLPs(String title) throws Exception {
 		LPController lpController = new LPController();
 		lpList = lpController.findLPs(title);
+		
+		if(lpList.isEmpty()) {
+			throw new Exception("No matching lps");
+		}
 
 		return lpController.displayLPList(lpList);
 	}
 
 	public Person selectPerson(int index) {
-		person = personList.get(index);
+		Person person = personList.get(index);
 		loan.setPerson(person);
 		return person;
 	}
-	
+
 	public LP selectLP(int index) {
-		lp = lpList.get(index);
+		LP lp = lpList.get(index);
 		copyList = lp.getCopies();
 		return lp;
 	}
 
 	public Copy selectCopy(int index) {
-		copy = copyList.get(index);
+		Copy copy = copyList.get(index);
 		loan.setCopy(copy);
 		lendCopy();
 		return copy;
 	}
-	
+
 	public void lendCopy() {
 		loanContainer.addLoan(loan);
 	}

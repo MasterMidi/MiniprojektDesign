@@ -19,25 +19,38 @@ public class LendCommand implements Option {
 	@Override
 	public void start() {
 		loanController.createLoan();
-
+		
 		findPersons();
 		selectPerson();
 		findLPs();
 		selectLP();
-		selectCopy();
-		
-		displayLoan(loanController.getLoan());
 
-		System.out.println();
-		System.out.println("Successfuld oprettede et nyt løn");
+		if(displayCopyList()) {
+			displayLoan(loanController.getLoan());
+			
+			System.out.println();
+			System.out.println("Successfuld oprettede et nyt løn");
+		} else {
+			System.out.println("Der var ingen kopier");
+			System.out.println();
+		}
 	}
 
 	public void findPersons() {
 		Util.flush();
-		System.out.println("Find person med navn eller telefon");
-		String personListFormatted = loanController.findPersons(TextInput.inputString("Søg"));
-
-		System.out.println(personListFormatted);
+		boolean done = false;
+		while(!done) {
+			System.out.println("Find person med navn eller telefon");
+			
+			try {
+				String personListFormatted = loanController.findPersons(TextInput.inputString("Søg"));
+				System.out.println(personListFormatted);
+				done = true;
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				System.out.println(e.getMessage());
+			}
+		}
 	}
 
 	public void selectPerson() {
@@ -69,11 +82,20 @@ public class LendCommand implements Option {
 	}
 
 	public void findLPs() {
-		System.out.println("Søg efter den ønskede LP");
-		String lpListFormatted = loanController.findLPs(TextInput.inputString("Søg"));
-		//String copyListFormatted = loanController.
-
-		System.out.println(lpListFormatted);
+		Util.flush();		
+		boolean done = false;
+		while(!done) {
+			System.out.println("Søg efter den ønskede LP");
+			
+			try {
+				String lpListFormatted = loanController.findLPs(TextInput.inputString("Søg"));
+				System.out.println(lpListFormatted);
+				done = true;
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				System.out.println(e.getMessage());
+			}
+		}
 	}
 
 	public void selectLP() {
@@ -101,17 +123,23 @@ public class LendCommand implements Option {
 		System.out.println("Kunstner:\t[" + lp.getArtist() + "]");
 		System.out.println("Udgivelses dato:[" + lp.getPublicationDate() + "]");
 		System.out.println("Stregkode:\t[" + lp.getBarcode() + "]");
-		
-		displayCopy();
 	}
 	
-	public void displayCopy() {
+	public boolean displayCopyList() {
 		List<Copy> copyList = loanController.getCopyList();
+		boolean hasCopies = true;
 		
-		Iterator<Copy> it = copyList.iterator();
-		for(int i = 0; it.hasNext(); i++) {
-			System.out.println("(" + i + ") " + it.next().getSerialNumber());
+		if(copyList.isEmpty()) {
+			System.out.println("Beklager, men der var ingen kopier til denne LP");
+			hasCopies = false;
+		} else {
+			Iterator<Copy> it = copyList.iterator();
+			for(int i = 0; it.hasNext(); i++) {
+				System.out.println("(" + i + ") " + it.next().getSerialNumber());
+			}
 		}
+		
+		return hasCopies;
 	}
 
 	public void selectCopy() {
