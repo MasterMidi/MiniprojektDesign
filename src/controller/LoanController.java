@@ -28,10 +28,10 @@ public class LoanController {
 
 	public void createLoan() {
 		Random rnd = new Random();
-		loan = new Loan("" + rnd.nextInt(10000), 7);
+		loan = new Loan("" + rnd.nextInt(10000), 30);
 	}
 
-	public String findPersons(String input) throws Exception {
+	public List<Person> findPersons(String input) throws Exception {
 		PersonController personController = new PersonController();
 		personList = personController.findPersons(input);
 
@@ -39,10 +39,10 @@ public class LoanController {
 			throw new Exception("No matching person");
 		}
 		
-		return personController.displayPersonList(personList);
+		return personList;
 	}
 
-	public String findLPs(String title) throws Exception {
+	public List<LP> findLPs(String title) throws Exception {
 		LPController lpController = new LPController();
 		lpList = lpController.findLPs(title);
 		
@@ -50,7 +50,7 @@ public class LoanController {
 			throw new Exception("No matching lps");
 		}
 
-		return lpController.displayLPList(lpList);
+		return lpList;
 	}
 
 	public Person selectPerson(int index) {
@@ -65,11 +65,10 @@ public class LoanController {
 		return lp;
 	}
 
-	public Copy selectCopy(int index) {
+	public void selectCopy(int index) {
 		Copy copy = copyList.get(index);
 		loan.setCopy(copy);
 		lendCopy();
-		return copy;
 	}
 
 	public void lendCopy() {

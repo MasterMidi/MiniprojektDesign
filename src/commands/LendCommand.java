@@ -43,14 +43,24 @@ public class LendCommand implements Option {
 			System.out.println("Find person med navn eller telefon");
 			
 			try {
-				String personListFormatted = loanController.findPersons(TextInput.inputString("Søg"));
-				System.out.println(personListFormatted);
+				List<Person> personList = loanController.findPersons(TextInput.inputString("Søg"));
+				displayPersonList(personList);
 				done = true;
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				System.out.println(e.getMessage());
 			}
 		}
+	}
+	
+	public void displayPersonList(List<Person> personList) {
+		StringBuilder formatted = new StringBuilder();
+		
+		for (int i = 0; i < personList.size(); i++) {
+			formatted.append("(" + i + ") " + personList.get(i).getName() + "\t: " + personList.get(i).getPhoneNr() + "\n");
+		}
+		
+		System.out.println(personList);
 	}
 
 	public void selectPerson() {
@@ -88,14 +98,24 @@ public class LendCommand implements Option {
 			System.out.println("Søg efter den ønskede LP");
 			
 			try {
-				String lpListFormatted = loanController.findLPs(TextInput.inputString("Søg"));
-				System.out.println(lpListFormatted);
+				List<LP> lpList = loanController.findLPs(TextInput.inputString("Søg"));
+				displayLPList(lpList);
 				done = true;
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				System.out.println(e.getMessage());
 			}
 		}
+	}
+	
+	public void displayLPList(List<LP> lpList) {
+		StringBuilder formatted = new StringBuilder();
+
+		for (int i = 0; i < lpList.size(); i++) {
+			formatted.append("(" + i + ") " + lpList.get(i).getTitle() + "\n");
+		}
+
+		System.out.println(lpList);
 	}
 
 	public void selectLP() {

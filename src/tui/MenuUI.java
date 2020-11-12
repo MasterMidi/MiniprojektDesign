@@ -6,9 +6,15 @@ import java.util.List;
 
 import util.Util;
 
-public abstract class MenuUI<T extends Option> implements Option{
+/**
+ * 
+ * @author Michael
+ *
+ * @param <T>
+ */
+public abstract class MenuUI implements Option{
 	private String description;
-	private List<T> options;
+	private List<Option> options;
 	
 	public MenuUI(String description) {
 		this.description = description;
@@ -29,7 +35,7 @@ public abstract class MenuUI<T extends Option> implements Option{
 		return description;
 	}
 	
-	public List<T> getOptions(){
+	public List<Option> getOptions(){
 		return new ArrayList<>(options);
 	}
 
@@ -56,7 +62,7 @@ public abstract class MenuUI<T extends Option> implements Option{
 		return exit;
 	}
 	
-	public void addOption(T option) {
+	public void addOption(Option option) {
 		options.add(option);
 	}
 
@@ -64,7 +70,7 @@ public abstract class MenuUI<T extends Option> implements Option{
 		System.out.println("****** " + description + " ******");
 		System.out.println("(0) Log af");
 
-		Iterator<T> it = options.iterator();
+		Iterator<Option> it = options.iterator();
 		for (int i = 0; i < options.size() && it.hasNext(); i++) {
 			System.out.println("(" + (i + 1) + ") " + it.next().getDescription());
 		}

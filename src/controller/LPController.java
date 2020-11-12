@@ -15,14 +15,4 @@ public class LPController {
 	public List<LP> findLPs(String title) {
 		return lpContainer.findLPs(title);
 	}
-
-	public String displayLPList(List<LP> lpList) {
-		StringBuilder formatted = new StringBuilder();
-
-		for (int i = 0; i < lpList.size(); i++) {
-			formatted.append("(" + i + ") " + lpList.get(i).getTitle() + "\n");
-		}
-
-		return formatted.toString();
-	}
 }
