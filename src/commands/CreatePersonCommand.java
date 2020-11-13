@@ -10,6 +10,9 @@ public class CreatePersonCommand implements IOption {
 	PersonController controller;
 	
 	@Override
+	/**
+	 * executes the command. in this case, it will ask for information that CreatePerson needs.
+	 */
 	public void start() {
 		
 		controller = new PersonController();
@@ -29,6 +32,9 @@ public class CreatePersonCommand implements IOption {
 	}
 
 	@Override
+	/**
+	 * Set the description of the UI
+	 */
 	public String getDescription() {
 		// TODO Auto-generated method stub
 		return "Tilføj Person";
