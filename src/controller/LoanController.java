@@ -70,6 +70,7 @@ public class LoanController {
 
 	public void selectCopy(int index) {
 		Copy copy = copyList.get(index);
+		copy.setBorrowed(true);
 		loan.setCopy(copy);
 		lendCopy();
 	}
@@ -84,7 +85,7 @@ public class LoanController {
 	}
 
 	public List<Person> getPersonList() {
-		return personList;
+		return new ArrayList<>(personList);
 	}
 
 	public void setPersonList(ArrayList<Person> personList) {
@@ -92,7 +93,7 @@ public class LoanController {
 	}
 
 	public List<LP> getLpList() {
-		return lpList;
+		return new ArrayList<>(lpList);
 	}
 
 	public void setLpList(ArrayList<LP> lpList) {
@@ -100,7 +101,7 @@ public class LoanController {
 	}
 
 	public List<Copy> getCopyList() {
-		return copyList;
+		return new ArrayList<>(copyList);
 	}
 
 	public void setCopyList(ArrayList<Copy> copyList) {

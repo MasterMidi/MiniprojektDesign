@@ -15,14 +15,6 @@ public class Copy {
 		this.borrowed = borrowed;
 	}
 
-	/**
-	 * Dummy Copy, kun til simple tests
-	 * @param serialNumber
-	 */
-	public Copy(String serialNumber) {
-		this(null, serialNumber, null, 0, false);
-	}
-
 	public LP getParentLP() {
 		return parentLP;
 	}

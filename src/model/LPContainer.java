@@ -20,6 +20,11 @@ public class LPContainer {
 		lpList = new ArrayList<>();
 	}
 	
+	/**
+	 * Finds a list of LPs matching the title
+	 * @param title the title to search for
+	 * @return the list of matching LPs
+	 */
 	public List<LP> findLPs(String title) {
 		List<LP> lpListFound = lpList.stream()
 				.filter(lp -> lp.getTitle().contains(title))

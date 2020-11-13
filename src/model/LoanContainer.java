@@ -18,6 +18,11 @@ public class LoanContainer {
 		loans = new ArrayList<>();
 	}
 	
+	/**
+	 * adds a loan to the container list
+	 * @param loan the loan to be added
+	 * @return if the operation was a success
+	 */
 	public boolean addLoan(Loan loan) {
 		boolean res = false;
 		

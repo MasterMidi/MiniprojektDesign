@@ -21,9 +21,6 @@ public class PersonUI extends MenuUI {
 	}
 	
 	@Override
-	/**
-	 * Show which options the interface has
-	 */
 	public void printOptions() {
 		System.out.println("****** " + getDescription() + " ******");
 		System.out.println("(0) Tilbage");

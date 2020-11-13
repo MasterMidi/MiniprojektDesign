@@ -16,10 +16,6 @@ public class Person {
 		this.city = city;
 	}
 
-	public Person(String name, String phoneNr) {
-		this(name, null, phoneNr, null, null);
-	}
-
 	/**
 	 * Get the name of the user
 	 * @return the name of the user
