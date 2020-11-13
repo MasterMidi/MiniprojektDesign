@@ -4,11 +4,11 @@ import java.util.List;
 
 import controller.PersonController;
 import model.Person;
-import tui.Option;
+import tui.IOption;
 import tui.TextInput;
 import util.Util;
 
-public class DeletePersonCommand implements Option {
+public class DeletePersonCommand implements IOption {
 
 	PersonController controller;
 	List<Person> persons;

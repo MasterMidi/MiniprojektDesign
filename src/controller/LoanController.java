@@ -1,8 +1,10 @@
 package controller;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
-import java.util.Random;
 
 import model.Copy;
 import model.LP;
@@ -27,8 +29,9 @@ public class LoanController {
 	}
 
 	public void createLoan() {
-		Random rnd = new Random();
-		loan = new Loan("" + rnd.nextInt(10000), 30);
+		DateFormat dateForamtter = new SimpleDateFormat("yyyy-MM-dd");
+		Calendar calendar = Calendar.getInstance();
+		loan = new Loan(30, dateForamtter.format(calendar.getTime()));
 	}
 
 	public List<Person> findPersons(String input) throws Exception {
@@ -72,6 +75,7 @@ public class LoanController {
 	}
 
 	public void lendCopy() {
+		loan.setState("ongoing");
 		loanContainer.addLoan(loan);
 	}
 

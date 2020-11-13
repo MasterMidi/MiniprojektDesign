@@ -18,13 +18,10 @@ public class LP {
 		this.publicationDate = publicationDate;
 		
 		copies = new ArrayList<>();
-		
-//		copies.add(new Copy("3192380192"));
-//		copies.add(new Copy("2547398573"));
-//		copies.add(new Copy("2347956744"));
-//		copies.add(new Copy("8912398795"));
-//		copies.add(new Copy("1237497433"));
-//		copies.add(new Copy("4129085238"));
+	}
+	
+	public LP(String title) {
+		this(title, null, null, null);
 	}
 	
 	public void addCopy(Copy copy) {
@@ -37,10 +34,6 @@ public class LP {
 	
 	public List<Copy> getCopies() {
 		return new ArrayList<>(copies);
-	}
-	
-	public LP(String title) {
-		this(title, null, null, null);
 	}
 
 	public String getTitle() {

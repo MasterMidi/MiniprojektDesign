@@ -8,13 +8,17 @@ import model.Copy;
 import model.LP;
 import model.Loan;
 import model.Person;
-import tui.Option;
+import tui.IOption;
 import tui.TextInput;
 import util.Util;
 
-public class LendCommand implements Option {
-	private LoanController loanController = new LoanController();
+public class LendCommand implements IOption {
+	private LoanController loanController;
 	private String commandName = "Udlån LP";
+	
+	public LendCommand() {
+		loanController = new LoanController();
+	}
 
 	@Override
 	public void start() {
@@ -26,13 +30,11 @@ public class LendCommand implements Option {
 		selectLP();
 
 		if(displayCopyList()) {
+			selectCopy();
 			displayLoan(loanController.getLoan());
 			
 			System.out.println();
 			System.out.println("Successfuld oprettede et nyt løn");
-		} else {
-			System.out.println("Der var ingen kopier");
-			System.out.println();
 		}
 	}
 
@@ -60,7 +62,7 @@ public class LendCommand implements Option {
 			formatted.append("(" + i + ") " + personList.get(i).getName() + "\t: " + personList.get(i).getPhoneNr() + "\n");
 		}
 		
-		System.out.println(personList);
+		System.out.println(formatted.toString());
 	}
 
 	public void selectPerson() {
@@ -115,7 +117,7 @@ public class LendCommand implements Option {
 			formatted.append("(" + i + ") " + lpList.get(i).getTitle() + "\n");
 		}
 
-		System.out.println(lpList);
+		System.out.println(formatted.toString());
 	}
 
 	public void selectLP() {
@@ -153,10 +155,14 @@ public class LendCommand implements Option {
 			System.out.println("Beklager, men der var ingen kopier til denne LP");
 			hasCopies = false;
 		} else {
+			StringBuilder formatted = new StringBuilder();
+			
 			Iterator<Copy> it = copyList.iterator();
 			for(int i = 0; it.hasNext(); i++) {
-				System.out.println("(" + i + ") " + it.next().getSerialNumber());
+				formatted.append("(" + i + ") " + it.next().getSerialNumber() + "\n");
 			}
+			
+			System.out.println(formatted.toString());
 		}
 		
 		return hasCopies;

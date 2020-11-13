@@ -3,17 +3,15 @@ package model;
 public class Loan {
 	private int period;
 	private String id;
+	private String state;
+	private String borrowedDate;
 	private Copy copy;
 	private Person person;
 	
-	public Loan(String id, int period) {
+	public Loan(int period, String borrowedDate) {
 		super();
+		this.borrowedDate = borrowedDate;
 		this.period = period;
-		this.id = id;
-	}
-	
-	public Loan() {
-		this(null, 0);
 	}
 
 	public int getPeriod() {
@@ -48,21 +46,22 @@ public class Loan {
 		this.person = person;
 	}
 
-//	public String getSerialNumber() {
-//		return serialNumber;
-//	}
-//
-//	public void setSerialNumber(String serialNumber) {
-//		this.serialNumber = serialNumber;
-//	}
-//
-//	public String getPhoneNr() {
-//		return phoneNr;
-//	}
-//
-//	public void setPhoneNr(String phoneNr) {
-//		this.phoneNr = phoneNr;
-//	}
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	public String getBorrowedDate() {
+		return borrowedDate;
+	}
+
+	public void setBorrowedDate(String borrowedDate) {
+		this.borrowedDate = borrowedDate;
+	}
+
 	
 	
 }

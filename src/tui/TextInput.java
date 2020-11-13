@@ -3,7 +3,7 @@ package tui;
 import java.util.Scanner;
 
 /**
- * Description of TextInput goes here.
+ * Creates a scanner, which waits 
  * 
  * @author Istvan Knoll, Mogens Holm Iversen
  * @version 0.0.1 initial draft version

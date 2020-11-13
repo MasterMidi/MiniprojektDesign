@@ -1,11 +1,11 @@
 package commands;
 
 import controller.PersonController;
-import tui.Option;
+import tui.IOption;
 import tui.TextInput;
 import util.Util;
 
-public class CreatePersonCommand implements Option {
+public class CreatePersonCommand implements IOption {
 
 	PersonController controller;
 	
@@ -24,7 +24,7 @@ public class CreatePersonCommand implements Option {
 		String city = TextInput.inputString("By: \t\t");
 		String postalCode = TextInput.inputString("Postnummer: \t\t");
 		
-		controller.CreatePerson(name, address, Integer.toString(phoneNr), postalCode, city);
+		controller.createPerson(name, address, Integer.toString(phoneNr), postalCode, city);
 		
 	}
 

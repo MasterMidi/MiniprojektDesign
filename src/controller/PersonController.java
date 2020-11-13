@@ -62,7 +62,7 @@ public class PersonController {
 	 * @param city       city in which the person lives
 	 * @return true/false based on if the person was added successfully
 	 */
-	public boolean CreatePerson(String name, String address, String phoneNr, String postalCode, String city) {
+	public boolean createPerson(String name, String address, String phoneNr, String postalCode, String city) {
 		Person person = new Person(name, address, phoneNr, postalCode, city);
 		return personContainer.addPerson(person);
 	}

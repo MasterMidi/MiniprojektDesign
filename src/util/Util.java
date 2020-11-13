@@ -4,6 +4,9 @@ import java.io.IOException;
 
 public class Util {
 
+	/**
+	 * A utility command for clearing the console (Doesn't work for eclipse, because securtity)
+	 */
 	public static void flush() {
 		try {
 			new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();

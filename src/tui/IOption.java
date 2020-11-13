@@ -1,6 +1,6 @@
 package tui;
 
-public interface Option {
+public interface IOption {
 	public void start();
 	public String getDescription();
 }

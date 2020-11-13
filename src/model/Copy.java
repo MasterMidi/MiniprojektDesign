@@ -4,10 +4,10 @@ public class Copy {
 	private LP parentLP;
 	private String serialNumber;
 	private String purchaseDate;
-	private String purchasePrice;
+	private double purchasePrice;
 	private boolean borrowed;
 	
-	public Copy(LP parentLP, String serialNumber, String purchaseDate, String purchasePrice, boolean borrowed) {
+	public Copy(LP parentLP, String serialNumber, String purchaseDate, double purchasePrice, boolean borrowed) {
 		this.parentLP = parentLP;
 		this.serialNumber = serialNumber;
 		this.purchaseDate = purchaseDate;
@@ -20,7 +20,7 @@ public class Copy {
 	 * @param serialNumber
 	 */
 	public Copy(String serialNumber) {
-		this(null, serialNumber, null, null, false);
+		this(null, serialNumber, null, 0, false);
 	}
 
 	public LP getParentLP() {
@@ -47,11 +47,11 @@ public class Copy {
 		this.purchaseDate = purchaseDate;
 	}
 
-	public String getPurchasePrice() {
+	public double getPurchasePrice() {
 		return purchasePrice;
 	}
 
-	public void setPurchasePrice(String purchasePrice) {
+	public void setPurchasePrice(double purchasePrice) {
 		this.purchasePrice = purchasePrice;
 	}
 

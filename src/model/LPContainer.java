@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 
 public class LPContainer {
 	private static LPContainer instance;
-	private List<LP> lps;
+	private List<LP> lpList;
 
 	public static LPContainer getInstance() {
 		if (instance == null) {
@@ -17,20 +17,18 @@ public class LPContainer {
 	}
 
 	private LPContainer() {
-		lps = new ArrayList<>();
-		
-		lps.add(new LP("Abbey Road"));
-		lps.add(new LP("Dark Side of the Moon"));
-		lps.add(new LP("Guardians of the Galaxy Awesome Mix Vol. 1"));
-		lps.add(new LP("Legend"));
-		lps.add(new LP("Back to Black"));
+		lpList = new ArrayList<>();
 	}
 	
 	public List<LP> findLPs(String title) {
-		List<LP> lpsFound = lps.stream()
+		List<LP> lpListFound = lpList.stream()
 				.filter(lp -> lp.getTitle().contains(title))
 				.collect(Collectors.toList());
 
-		return lpsFound;
+		return lpListFound;
+	}
+	
+	public boolean addLP(LP lp) {
+		return lpList.add(lp);
 	}
 }

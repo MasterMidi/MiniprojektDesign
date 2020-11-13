@@ -12,9 +12,9 @@ import util.Util;
  *
  * @param <T>
  */
-public abstract class MenuUI implements Option{
+public abstract class MenuUI implements IOption{
 	private String description;
-	private List<Option> options;
+	private List<IOption> options;
 	
 	public MenuUI(String description) {
 		this.description = description;
@@ -35,7 +35,7 @@ public abstract class MenuUI implements Option{
 		return description;
 	}
 	
-	public List<Option> getOptions(){
+	public List<IOption> getOptions(){
 		return new ArrayList<>(options);
 	}
 
@@ -62,7 +62,7 @@ public abstract class MenuUI implements Option{
 		return exit;
 	}
 	
-	public void addOption(Option option) {
+	public void addOption(IOption option) {
 		options.add(option);
 	}
 
@@ -70,7 +70,7 @@ public abstract class MenuUI implements Option{
 		System.out.println("****** " + description + " ******");
 		System.out.println("(0) Log af");
 
-		Iterator<Option> it = options.iterator();
+		Iterator<IOption> it = options.iterator();
 		for (int i = 0; i < options.size() && it.hasNext(); i++) {
 			System.out.println("(" + (i + 1) + ") " + it.next().getDescription());
 		}

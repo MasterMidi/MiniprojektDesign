@@ -2,14 +2,15 @@ package tui;
 
 import java.util.Iterator;
 
-import commands.LendCommand;
-import util.Util;
+import commands.CreateLPCommand;
+import commands.CreateLPCopyCommand;
 
-public class LoanUI extends MenuUI{
-	public LoanUI() {
-		super("Låner Menu");
+public class LPUI extends MenuUI{
+	public LPUI() {
+		super("LP Menu");
 		
-		super.addOption(new LendCommand());
+		super.addOption(new CreateLPCommand());
+		super.addOption(new CreateLPCopyCommand());
 	}
 	
 	@Override

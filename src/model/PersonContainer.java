@@ -24,16 +24,6 @@ public class PersonContainer {
 	
 	private PersonContainer() {
 		persons = new ArrayList<>();
-
-		// Dummy data
-		persons.add(new Person("Michael", "24267667"));
-		persons.add(new Person("Anders", "41398413"));
-		persons.add(new Person("Jannie", "30616515"));
-		persons.add(new Person("Johnny", "12938102"));
-		persons.add(new Person("Michael", "132837198"));
-		persons.add(new Person("Julius", "53381465"));
-		persons.add(new Person("Nicklas", "20741072"));
-		persons.add(new Person("Alex", "24986881"));
 	}
 
 	/**

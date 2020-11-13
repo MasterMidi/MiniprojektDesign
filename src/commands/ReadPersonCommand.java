@@ -5,11 +5,11 @@ import java.util.List;
 
 import controller.PersonController;
 import model.Person;
-import tui.Option;
+import tui.IOption;
 import tui.TextInput;
 import util.Util;
 
-public class ReadPersonCommand implements Option {
+public class ReadPersonCommand implements IOption {
 
 	PersonController controller;
 
