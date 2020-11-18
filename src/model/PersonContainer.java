@@ -11,6 +11,7 @@ public class PersonContainer {
 
 	/**
 	 * Singleton instance for the personContainer
+	 * 
 	 * @return singleton object of PersonContainer
 	 */
 	public static PersonContainer getInstance() {
@@ -21,13 +22,13 @@ public class PersonContainer {
 		return instance;
 	}
 
-	
 	private PersonContainer() {
 		persons = new ArrayList<>();
 	}
 
 	/**
 	 * Finds persons based on search query
+	 * 
 	 * @param input search query
 	 * @return List of persons that match the search query
 	 */
@@ -42,6 +43,7 @@ public class PersonContainer {
 
 	/**
 	 * Find a person with id
+	 * 
 	 * @param id the id of the person to find
 	 * @return Person with the specific id
 	 */
@@ -49,11 +51,11 @@ public class PersonContainer {
 		Optional<Person> person = persons.stream().filter(p -> p.getPhoneNr().equals(id)).findFirst();
 
 		return person.get();
-
 	}
 
 	/**
 	 * deletes a person with the specific id
+	 * 
 	 * @param id id of the person to delete
 	 */
 	public void deletePerson(String id) {
@@ -62,43 +64,41 @@ public class PersonContainer {
 	}
 
 	/**
-	 * Updates a person
-	 * if value are null of empty, the current value will be used 
-	 * @param id id of the person to update
-	 * @param name new name to the updated person
-	 * @param address new address for the person
-	 * @param phoneNr new phone number for the person
+	 * Updates a person if value are null of empty, the current value will be used
+	 * 
+	 * @param id         id of the person to update
+	 * @param name       new name to the updated person
+	 * @param address    new address for the person
+	 * @param phoneNr    new phone number for the person
 	 * @param postalCode new postal code for the person
-	 * @param city new city for the person
+	 * @param city       new city for the person
 	 * @return
 	 */
-	public boolean updatePerson(String id, String name, String address, String phoneNr, String postalCode,String city) {
+	public boolean updatePerson(String id, String name, String address, String phoneNr, String postalCode,
+			String city) {
 		try {
 			int index = persons.indexOf(selectPerson(id));
 
 			// Null check. If null, use the already set value
-			persons.get(index)
-					.setName((name == null || name.isEmpty()) ? persons.get(index).getName() : name);
+			persons.get(index).setName((name == null || name.isEmpty()) ? persons.get(index).getName() : name);
 			persons.get(index)
 					.setAddress((address == null || address.isEmpty()) ? persons.get(index).getAddress() : address);
 			persons.get(index)
 					.setPhoneNr((phoneNr == null || phoneNr.isEmpty()) ? persons.get(index).getPhoneNr() : phoneNr);
-			persons.get(index)
-					.setPostalCode(
+			persons.get(index).setPostalCode(
 					(postalCode == null || postalCode.isEmpty()) ? persons.get(index).getPostalCode() : postalCode);
-			persons.get(index)
-					.setCity((city == null || city.isEmpty()) ? persons.get(index).getCity() : city);
-			
+			persons.get(index).setCity((city == null || city.isEmpty()) ? persons.get(index).getCity() : city);
+
 			return true;
 		} catch (Exception e) {
 			return false;
 		}
-		
 
 	}
 
 	/**
 	 * Adds a person to the 'persons' list
+	 * 
 	 * @param person person to add
 	 * @return true/false based on success.
 	 */
